@@ -58,6 +58,7 @@ public class ModernBetaBiomeTags {
     public static final TagKey<Biome> SURFACE_CONFIG_SNOW_PACKED_ICE = keyOf("surface_config/snow_packed_ice");
     public static final TagKey<Biome> SURFACE_CONFIG_SNOW_STONE = keyOf("surface_config/snow_stone");
 
+    public static final TagKey<Biome> HEIGHT_CONFIG_DEFAULT = keyOf("height_config/default");
     public static final TagKey<Biome> HEIGHT_CONFIG_OCEAN = keyOf("height_config/ocean");
     public static final TagKey<Biome> HEIGHT_CONFIG_DESERT = keyOf("height_config/desert");
     public static final TagKey<Biome> HEIGHT_CONFIG_EXTREME_HILLS = keyOf("height_config/extreme_hills");

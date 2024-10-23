@@ -45,7 +45,6 @@ public record HeightConfig(float depth, float scale, byte type) {
             .stream()
             .filter(id -> biomeInfo.biome().isIn(keyOf(id)))
 	        .map(ModernBetaRegistries.HEIGHT_CONFIG::get)
-            .filter(config -> config.type == biomeInfo.type())
 	        .toList();
 		return configs.stream().filter(config -> biomeInfo.type() == config.type).findAny()
 				.orElse(configs.stream().findAny().orElse(DEFAULT));

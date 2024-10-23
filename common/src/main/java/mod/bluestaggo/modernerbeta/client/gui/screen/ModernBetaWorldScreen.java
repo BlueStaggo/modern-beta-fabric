@@ -101,23 +101,20 @@ public class ModernBetaWorldScreen extends ModernBetaScreen {
             hintText,
             this.textRenderer
         ));
-        
-        Formatting presetTextColor = ModernBetaRegistries.SETTINGS_PRESET.contains(this.getPresetKey()) ?
-            Formatting.YELLOW :
-            Formatting.AQUA;
+
         MutableText presetText = Text.translatable(TEXT_PRESET).append(": ");
         presetText.append(this.isPresetCustom() ?
-            Text.translatable(TEXT_PRESET_CUSTOM) : 
-            Text.translatable(TEXT_PRESET_NAME + "." + this.getPresetKey()).formatted(presetTextColor)
+            Text.translatable(TEXT_PRESET_CUSTOM) :
+            Text.translatable(TEXT_PRESET_NAME + "." + this.getPresetKey()).formatted(Formatting.YELLOW)
         );
             
         this.buttonPreset = ButtonWidget.builder(
             presetText,
             button -> this.client.setScreen(new ModernBetaSettingsPresetScreen(
                 this,
-                ModernBetaRegistries.SETTINGS_PRESET.getKeySet().stream().toList(),
-                ModernBetaRegistries.SETTINGS_PRESET_ALT.getKeySet().stream().toList(),
-                this.preset
+                ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.getKeySet().stream().toList(),
+                this.preset,
+                true
             ))
         ).dimensions(0, 0, BUTTON_LENGTH_PRESET, BUTTON_HEIGHT_PRESET).build();
         
@@ -209,17 +206,13 @@ public class ModernBetaWorldScreen extends ModernBetaScreen {
     }
     
     private boolean isPresetCustom() {
-        return !(ModernBetaRegistries.SETTINGS_PRESET.contains(this.preset) ||
-            ModernBetaRegistries.SETTINGS_PRESET_ALT.contains(this.preset));
+        return !ModernBetaRegistries.SETTINGS_PRESET.contains(this.preset);
     }
     
     private String getPresetKey() {
         if (ModernBetaRegistries.SETTINGS_PRESET.contains(this.preset))
             return ModernBetaRegistries.SETTINGS_PRESET.getKey(this.preset);
-        
-        if (ModernBetaRegistries.SETTINGS_PRESET_ALT.contains(this.preset))
-            return ModernBetaRegistries.SETTINGS_PRESET_ALT.getKey(this.preset);
-        
+
         return null;
     }
 }

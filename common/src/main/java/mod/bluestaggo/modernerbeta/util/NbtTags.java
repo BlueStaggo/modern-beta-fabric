@@ -127,6 +127,7 @@ public class NbtTags {
     public static final String FRACTAL_EDGE_VARIANTS = "fractalEdgeVariants";
     public static final String FRACTAL_VERY_RARE_VARIANTS = "fractalVeryRareVariants";
     public static final String FRACTAL_SUB_VARIANTS = "fractalSubVariants";
+    public static final String FRACTAL_MUTATED_VARIANTS = "fractalMutatedVariants";
     public static final String FRACTAL_PLAINS = "fractalPlains";
     public static final String FRACTAL_ICE_PLAINS = "fractalIcePlains";
     public static final String FRACTAL_BIOME_SCALE = "fractalBiomeScale";

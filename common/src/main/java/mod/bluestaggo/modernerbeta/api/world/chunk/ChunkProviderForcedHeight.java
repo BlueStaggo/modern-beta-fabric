@@ -79,7 +79,7 @@ public abstract class ChunkProviderForcedHeight extends ChunkProviderNoise {
                 float thisScale = this.chunkSettings.releaseBiomeScaleOffset + heightConfig.scale() * this.chunkSettings.releaseBiomeScaleWeight;
                 float thisDepth = this.chunkSettings.releaseBiomeDepthOffset + heightConfig.depth() * this.chunkSettings.releaseBiomeDepthWeight;
 
-                float weight = BIOME_HEIGHT_WEIGHTS[biomeX + 2 + (biomeZ + 2) * 5] / (thisDepth + 2.0F);
+                float weight = BIOME_HEIGHT_WEIGHTS[biomeX + 2 + (biomeZ + 2) * 5] / Math.max(thisDepth + 2.0F, 0.01F);
                 if (heightConfig.depth() > minSurfaceHeight) {
                     weight /= 2.0F;
                 }

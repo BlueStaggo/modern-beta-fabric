@@ -129,6 +129,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             .putCompound(NbtTags.FRACTAL_EDGE_VARIANTS, FractalSettings.mapToNbt(this.fractalEdgeVariants))
             .putCompound(NbtTags.FRACTAL_VERY_RARE_VARIANTS, FractalSettings.mapToNbt(this.fractalVeryRareVariants))
             .putCompound(NbtTags.FRACTAL_SUB_VARIANTS, FractalSettings.mapOfListToNbt(this.fractalSubVariants))
+            .putCompound(NbtTags.FRACTAL_MUTATED_VARIANTS, FractalSettings.mapToNbt(this.fractalMutatedVariants))
             .putString(NbtTags.FRACTAL_PLAINS, this.fractalPlains)
             .putString(NbtTags.FRACTAL_ICE_PLAINS, this.fractalIcePlains)
             .putInt(NbtTags.FRACTAL_BIOME_SCALE, this.fractalBiomeScale)
@@ -372,6 +373,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
                 Map.entry("minecraft:jungle", "2*minecraft:jungle"),
                 Map.entry("minecraft:sparse_jungle", "2*minecraft:sparse_jungle"),
                 Map.entry("minecraft:snowy_taiga", "2*minecraft:snowy_taiga"),
+                Map.entry("minecraft:snowy_plains", "minecraft:ice_spikes"),
                 Map.entry("minecraft:savanna", "minecraft:windswept_savanna"),
                 Map.entry("minecraft:savanna_plateau", "*minecraft:windswept_savanna"),
                 Map.entry("minecraft:badlands", "*minecraft:eroded_badlands"),
@@ -429,6 +431,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             this.fractalHillVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_HILL_VARIANTS, reader, this.fractalHillVariants);
             this.fractalVeryRareVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_VERY_RARE_VARIANTS, reader, this.fractalVeryRareVariants);
             this.fractalSubVariants = FractalSettings.mapOfListFromReader(NbtTags.FRACTAL_SUB_VARIANTS, reader, this.fractalSubVariants);
+            this.fractalMutatedVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_MUTATED_VARIANTS, reader, this.fractalMutatedVariants);
             this.fractalPlains = reader.readString(NbtTags.FRACTAL_PLAINS, this.fractalPlains);
             this.fractalIcePlains = reader.readString(NbtTags.FRACTAL_ICE_PLAINS, this.fractalIcePlains);
             this.fractalBiomeScale = reader.readInt(NbtTags.FRACTAL_BIOME_SCALE, this.fractalBiomeScale);

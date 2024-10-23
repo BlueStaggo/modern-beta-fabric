@@ -343,6 +343,16 @@ public class ModernBetaTagProviderBiome extends FabricTagProvider<Biome> {
 
         /* Modern Beta Biome Height Tags */
 
+        getOrCreateTagBuilder(HEIGHT_CONFIG_DEFAULT)
+            .addTag(IS_TUNDRA)
+            .addTag(HEIGHT_CONFIG_SHORT_HILLS)
+            .add(
+                BiomeKeys.BADLANDS,
+                BiomeKeys.ERODED_BADLANDS,
+                BiomeKeys.WOODED_BADLANDS,
+                BiomeKeys.SAVANNA
+            );
+
         getOrCreateTagBuilder(HEIGHT_CONFIG_OCEAN)
             .addTag(BiomeTags.IS_OCEAN)
             .add(
@@ -423,7 +433,6 @@ public class ModernBetaTagProviderBiome extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(HEIGHT_CONFIG_SHORT_HILLS)
             .addTag(IS_FOREST)
             .addTag(IS_SEASONAL_FOREST)
-            .addTag(IS_SAVANNA)
             .addTag(IS_SHRUBLAND)
             .addTag(IS_PLAINS)
             .add(
@@ -466,9 +475,9 @@ public class ModernBetaTagProviderBiome extends FabricTagProvider<Biome> {
 
         getOrCreateTagBuilder(HEIGHT_CONFIG_PLATEAU_HILL)
             .add(
-                    BiomeKeys.BADLANDS,
-                    BiomeKeys.ERODED_BADLANDS,
-                    BiomeKeys.WOODED_BADLANDS
+                BiomeKeys.BADLANDS,
+                BiomeKeys.ERODED_BADLANDS,
+                BiomeKeys.WOODED_BADLANDS
             );
 
         getOrCreateTagBuilder(HEIGHT_CONFIG_DEEP_OCEAN)
