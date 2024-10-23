@@ -8,6 +8,7 @@ import mod.bluestaggo.modernerbeta.api.world.chunk.noise.NoisePostProcessor;
 import mod.bluestaggo.modernerbeta.api.world.chunk.surface.SurfaceConfig;
 import mod.bluestaggo.modernerbeta.settings.ModernBetaSettingsChunk;
 import mod.bluestaggo.modernerbeta.settings.ModernBetaSettingsPreset;
+import mod.bluestaggo.modernerbeta.settings.ModernBetaSettingsPresetCategory;
 import mod.bluestaggo.modernerbeta.world.biome.HeightConfig;
 import mod.bluestaggo.modernerbeta.world.chunk.ModernBetaChunkGenerator;
 import net.minecraft.nbt.NbtCompound;
@@ -24,8 +25,8 @@ public final class ModernBetaRegistries {
     public static final ModernBetaRegistry<HeightConfig> HEIGHT_CONFIG;
     public static final ModernBetaRegistry<BlockSourceCreator> BLOCKSOURCE;
     public static final ModernBetaRegistry<ModernBetaSettingsPreset> SETTINGS_PRESET;
-    public static final ModernBetaRegistry<ModernBetaSettingsPreset> SETTINGS_PRESET_ALT;
-    
+    public static final ModernBetaRegistry<ModernBetaSettingsPresetCategory> SETTINGS_PRESET_CATEGORY;
+
     static {
         CHUNK = new ModernBetaRegistry<>("CHUNK");
         BIOME = new ModernBetaRegistry<>("BIOME");
@@ -35,7 +36,7 @@ public final class ModernBetaRegistries {
         HEIGHT_CONFIG = new ModernBetaRegistry<>("HEIGHT_CONFIG");
         BLOCKSOURCE = new ModernBetaRegistry<>("BLOCKSOURCE");
         SETTINGS_PRESET = new ModernBetaRegistry<>("SETTINGS_PRESET");
-        SETTINGS_PRESET_ALT = new ModernBetaRegistry<>("SETTINGS_PRESET_ALT");
+        SETTINGS_PRESET_CATEGORY = new ModernBetaRegistry<>("SETTINGS_PRESET_CATEGORIES");
     }
     
     @FunctionalInterface

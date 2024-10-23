@@ -54,7 +54,7 @@ public class ModernerBeta {
         ModernBetaBuiltInProviders.registerNoisePostProcessors();
         ModernBetaBuiltInProviders.registerBlockSources();
         ModernBetaBuiltInProviders.registerSettingsPresets();
-        ModernBetaBuiltInProviders.registerSettingsPresetAlts();
+        ModernBetaBuiltInProviders.registerSettingsPresetCategories();
 
         if (CLIENT_ENV) {
             // Override default biome grass/foliage colors

@@ -83,6 +83,7 @@ public final class ModernBetaBuiltInTypes {
     }
 
     public enum HeightConfig {
+        HEIGHT_CONFIG_DEFAULT(ModernBetaBiomeTags.HEIGHT_CONFIG_DEFAULT.id().toString()),
         HEIGHT_CONFIG_OCEAN(ModernBetaBiomeTags.HEIGHT_CONFIG_OCEAN.id().toString()),
         HEIGHT_CONFIG_DESERT(ModernBetaBiomeTags.HEIGHT_CONFIG_DESERT.id().toString()),
         HEIGHT_CONFIG_EXTREME_HILLS(ModernBetaBiomeTags.HEIGHT_CONFIG_EXTREME_HILLS.id().toString()),
@@ -156,16 +157,6 @@ public final class ModernBetaBuiltInTypes {
         RELEASE_1_6_4("release_1_6_4"),
         RELEASE_1_12_2("release_1_12_2"),
         RELEASE_1_17_1("release_1_17_1"),
-        ;
-        
-        public final String id;
-        
-        private Preset(String id) {
-            this.id = id;
-        }
-    }
-    
-    public enum PresetAlt {
         BETA_SKYLANDS("beta_skylands"),
         BETA_ISLES("beta_isles"),
         BETA_WATER_WORLD("beta_water_world"),
@@ -178,7 +169,6 @@ public final class ModernBetaBuiltInTypes {
         BETA_XBOX_LEGACY("beta_xbox_legacy"),
         BETA_SURVIVAL_ISLAND("beta_survival_island"),
         BETA_VANILLA("beta_vanilla"),
-        BETA_HYBRID("beta_hybrid"),
         RELEASE_HYBRID("release_hybrid"),
         ALPHA_WINTER("alpha_winter"),
         INDEV_PARADISE("indev_paradise"),
@@ -190,11 +180,37 @@ public final class ModernBetaBuiltInTypes {
         MOUNTAIN_MADNESS("mountain_madness"),
         DROUGHT("drought"),
         CAVE_CHAOS("cave_chaos"),
+        BETA_1_8_1_LARGE_BIOMES("beta_1_8_1_large_biomes"),
+        BETA_1_9_PRE_3_LARGE_BIOMES("beta_1_9_pre_3_large_biomes"),
+        RELEASE_1_0_0_LARGE_BIOMES("release_1_0_0_large_biomes"),
+        RELEASE_1_1_LARGE_BIOMES("release_1_1_large_biomes"),
+        RELEASE_1_2_5_LARGE_BIOMES("release_1_2_5_large_biomes"),
+        RELEASE_1_6_4_LARGE_BIOMES("release_1_6_4_large_biomes"),
+        RELEASE_1_12_2_LARGE_BIOMES("release_1_12_2_large_biomes"),
+        RELEASE_1_17_1_LARGE_BIOMES("release_1_17_1_large_biomes"),
         ;
         
         public final String id;
         
-        private PresetAlt(String id) {
+        private Preset(String id) {
+            this.id = id;
+        }
+    }
+
+    public enum PresetCategory {
+        BETA("beta"),
+        ALPHA_INFDEV("alpha_infdev"),
+        LIMITED_SIZE("limited_size"),
+        EARLY_RELEASE("early_release"),
+        EARLY_RELEASE_LARGE_BIOMES("early_release_large_biomes"),
+        MAJOR_RELEASE("major_release"),
+        BETA_CUSTOM("beta_custom"),
+        RELEASE_CUSTOM("release_custom"),
+        ;
+
+        public final String id;
+
+        private PresetCategory(String id) {
             this.id = id;
         }
     }
