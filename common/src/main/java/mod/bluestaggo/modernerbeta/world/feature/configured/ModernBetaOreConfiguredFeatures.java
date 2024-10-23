@@ -5,9 +5,12 @@ import mod.bluestaggo.modernerbeta.world.feature.ModernBetaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -35,7 +38,16 @@ public class ModernBetaOreConfiguredFeatures {
         List<OreFeatureConfig.Target> caveTargets = List.of(
             OreFeatureConfig.createTarget(ruleStone, Blocks.AIR.getDefaultState()),
             OreFeatureConfig.createTarget(ruleDeepslate, Blocks.AIR.getDefaultState()),
-            OreFeatureConfig.createTarget(ruleDirt, Blocks.AIR.getDefaultState())
+            OreFeatureConfig.createTarget(ruleDirt, Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", "ores"))), Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(TagKey.of(RegistryKeys.BLOCK, Identifier.of("forge", "ores"))), Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(BlockTags.COAL_ORES), Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(BlockTags.COPPER_ORES), Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(BlockTags.IRON_ORES), Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(BlockTags.GOLD_ORES), Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(BlockTags.DIAMOND_ORES), Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(BlockTags.REDSTONE_ORES), Blocks.AIR.getDefaultState()),
+            OreFeatureConfig.createTarget(new TagMatchRuleTest(BlockTags.LAPIS_ORES), Blocks.AIR.getDefaultState())
         );
         
         ConfiguredFeatures.register(featureRegisterable, ORE_CLAY, ModernBetaFeatures.ORE_CLAY.get(), new OreFeatureConfig(new BlockMatchRuleTest(Blocks.SAND), Blocks.CLAY.getDefaultState(), 33));

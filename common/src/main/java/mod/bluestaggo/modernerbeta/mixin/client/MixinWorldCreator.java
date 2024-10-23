@@ -26,19 +26,17 @@ public abstract class MixinWorldCreator {
         
         if (preset != null && preset.getKey().isPresent() && preset.getKey().get().equals(modernBeta)) {
             info.setReturnValue(
-                (parent, generatorOptionsHolder) -> {
-                    return new ModernBetaWorldScreen(
-                        parent,
-                        generatorOptionsHolder,
-                        (settingsChunk, settingsBiome, settingsCaveBiome) -> parent.getWorldCreator().applyModifier(
-                            ModernBetaWorldScreenProvider.createModifier(
-                                settingsChunk,
-                                settingsBiome,
-                                settingsCaveBiome
-                            )
+                (parent, generatorOptionsHolder) -> new ModernBetaWorldScreen(
+                    parent,
+                    generatorOptionsHolder,
+                    (settingsChunk, settingsBiome, settingsCaveBiome) -> parent.getWorldCreator().applyModifier(
+                        ModernBetaWorldScreenProvider.createModifier(
+                            settingsChunk,
+                            settingsBiome,
+                            settingsCaveBiome
                         )
-                    );
-                }
+                    )
+                )
             );
         }
     }
