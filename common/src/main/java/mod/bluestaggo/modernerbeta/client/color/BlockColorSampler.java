@@ -40,9 +40,9 @@ public final class BlockColorSampler {
     
     public int getGrassColor(BlockState state, BlockRenderView view, BlockPos pos, int tintNdx) {
         if (view == null || pos == null) { // Appears to enter here when loading color for inventory block
-            return 0x7CBD6B; // Default tint, from wiki
+            return GrassColors.getDefaultColor();
         }
-        
+
         if (this.useBiomeColor()) {
             int x = pos.getX();
             int z = pos.getZ();
@@ -57,7 +57,7 @@ public final class BlockColorSampler {
     
     public int getTallGrassColor(BlockState state, BlockRenderView view, BlockPos pos, int tintNdx) {
         if (view == null || pos == null) { // Appears to enter here when loading color for inventory block
-            return 0x7CBD6B; // Default tint, from wiki
+            return GrassColors.getDefaultColor();
         }
         
         if (this.useBiomeColor()) {
@@ -81,7 +81,7 @@ public final class BlockColorSampler {
     
     public int getFoliageColor(BlockState state, BlockRenderView view, BlockPos pos, int tintNdx) {
         if (view == null || pos == null) { // Appears to enter here when loading color for inventory block
-            return 0x48B518; // Default tint, from wiki
+            return FoliageColors.getDefaultColor();
         }
         
         if (this.useBiomeColor()) {
@@ -119,7 +119,7 @@ public final class BlockColorSampler {
         }
 
         if (this.useBiomeColor()) {
-            return 0xFFFFFF;
+            return 0xFFFFFFFF;
         }
         
         return BiomeColors.getGrassColor(view, pos);
