@@ -1,12 +1,10 @@
 package mod.bluestaggo.modernerbeta.api.world.chunk;
 
-import mod.bluestaggo.modernerbeta.ModernerBeta;
 import mod.bluestaggo.modernerbeta.world.biome.HeightConfig;
 import mod.bluestaggo.modernerbeta.world.biome.ModernBetaBiomeSource;
 import mod.bluestaggo.modernerbeta.world.biome.provider.fractal.BiomeInfo;
 import mod.bluestaggo.modernerbeta.world.chunk.ModernBetaChunkGenerator;
 import net.minecraft.util.math.MathHelper;
-import org.slf4j.event.Level;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,18 +40,8 @@ public abstract class ChunkProviderForcedHeight extends ChunkProviderNoise {
         String id = biomeInfo.getId();
         if (this.chunkSettings.releaseHeightOverrides.containsKey(id)) {
             HeightConfig fallbackConfig = config;
-            config = this.heightOverrideCache.computeIfAbsent(biomeInfo, k -> {
-                String heightConfigString = this.chunkSettings.releaseHeightOverrides.get(id);
-                String[] heightConfigPair = heightConfigString.split(";");
-                try {
-                    float scale = Float.parseFloat(heightConfigPair[0]);
-                    float depth = Float.parseFloat(heightConfigPair[1]);
-                    return new HeightConfig(scale, depth);
-                } catch (NumberFormatException | ArrayIndexOutOfBoundsException ignored) {
-                    ModernerBeta.log(Level.WARN, String.format("Invalid height config \"%s\"", heightConfigString));
-                    return fallbackConfig;
-                }
-            });
+            config = this.heightOverrideCache.computeIfAbsent(biomeInfo, k ->
+                HeightConfig.parse(this.chunkSettings.releaseHeightOverrides.get(id), fallbackConfig));
         }
 
         return config;

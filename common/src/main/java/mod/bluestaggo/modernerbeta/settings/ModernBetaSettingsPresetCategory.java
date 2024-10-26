@@ -26,7 +26,7 @@ public record ModernBetaSettingsPresetCategory(String defaultIcon, List<String> 
                 ModernBetaBuiltInTypes.Preset.INFDEV_227.id
             )
     );
-    public static ModernBetaSettingsPresetCategory LIMITED_SIZE = new ModernBetaSettingsPresetCategory(
+    public static ModernBetaSettingsPresetCategory FINITE = new ModernBetaSettingsPresetCategory(
             ModernBetaBuiltInTypes.Preset.INDEV.id,
             List.of(
                 ModernBetaBuiltInTypes.Preset.INDEV.id,

@@ -27,7 +27,7 @@ import net.minecraft.util.Util;
 
 import java.util.List;
 
-@Environment(value=EnvType.CLIENT)
+@Environment(EnvType.CLIENT)
 public class ModernBetaSettingsPresetScreen extends ModernBetaScreen {
     private static final String TEXT_TITLE = "createWorld.customize.modern_beta.title.preset";
     private static final String TEXT_PRESET_NAME = "createWorld.customize.modern_beta.preset.name";
@@ -94,7 +94,6 @@ public class ModernBetaSettingsPresetScreen extends ModernBetaScreen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-        
         this.listWidget.render(context, mouseX, mouseY, delta);
     }
 

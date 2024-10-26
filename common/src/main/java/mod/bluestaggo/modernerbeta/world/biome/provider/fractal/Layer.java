@@ -116,7 +116,10 @@ public abstract class Layer {
 
 		Layer biomes = new LayerAddBiomes(200, land, settings.biomes, replacementBiomes, settings.climaticBiomes);
 		for (int i = 0; i < settings.hillScale; i++) {
-			if (settings.subVariantScale == i && !settings.subVariants.isEmpty()) biomes = new LayerSubVariants(settings.subVariantSeed, biomes, settings.subVariants);
+			var subVariants = settings.subVariants.get(i);
+			if (subVariants != null) {
+				biomes = new LayerSubVariants(settings.subVariantSeed + i, biomes, subVariants);
+			}
 
 			if (settings.beachShrink == i - 2 - settings.hillScale && settings.addBeaches) {
 				biomes = new LayerAddEdge(1000, biomes, beach, ocean, mushroomIsland,
@@ -125,7 +128,12 @@ public abstract class Layer {
 
 			biomes = new LayerZoom(1000 + i, biomes);
 		}
-		if (settings.subVariantScale == settings.hillScale && !settings.subVariants.isEmpty()) biomes = new LayerSubVariants(settings.subVariantSeed, biomes, settings.subVariants);
+
+		var subVariants = settings.subVariants.get(settings.hillScale);
+		if (subVariants != null) {
+			biomes = new LayerSubVariants(settings.subVariantSeed + settings.hillScale, biomes, subVariants);
+		}
+
 		if (settings.useClimaticBiomes) biomes = new LayerAddEdge(1000, biomes, settings.edgeVariants, biomeLookup);
 		if (settings.addHills) {
 			int neighborRequirement = settings.terrainType == FractalSettings.TerrainType.MAJOR_RELEASE ? 3 : 4;
