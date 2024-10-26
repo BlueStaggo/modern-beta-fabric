@@ -1,3 +1,8 @@
+# 2.0.1
+
+## Fixes
+- Grass and leaves should no longer appear transparent under certain conditions.
+
 # 2.0.0
 
 The highly anticipated graphical customization menu has made a return! Every single option can be configured from graphical menus with JSON editing still available as an option.
