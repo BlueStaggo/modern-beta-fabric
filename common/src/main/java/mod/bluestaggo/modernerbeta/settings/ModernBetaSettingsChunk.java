@@ -389,11 +389,7 @@ public class ModernBetaSettingsChunk implements ModernBetaSettings {
             this.noiseBottomSlideSize = 3;
             this.noiseBottomSlideOffset = 0;
 
-            this.releaseHeightOverrides = Map.ofEntries(
-                Map.entry("example:flat_biome", "-0.2;0.1"),
-                Map.entry("*example:flat_biome", "-0.1;0.5"),
-                Map.entry("2*example:flat_biome", "0.1;1.0")
-            );
+            this.releaseHeightOverrides = Map.of();
             this.releaseBiomeDepthWeight = 1.0f;
             this.releaseBiomeDepthOffset = 0.0f;
             this.releaseBiomeScaleWeight = 1.0f;

@@ -171,7 +171,7 @@ public class ModernBetaBuiltInProviders {
         ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.register(ModernBetaBuiltInTypes.DEFAULT_ID, ModernBetaSettingsPresetCategory.BETA);
         ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.register(ModernBetaBuiltInTypes.PresetCategory.BETA.id, ModernBetaSettingsPresetCategory.BETA);
         ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.register(ModernBetaBuiltInTypes.PresetCategory.ALPHA_INFDEV.id, ModernBetaSettingsPresetCategory.ALPHA_INFDEV);
-        ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.register(ModernBetaBuiltInTypes.PresetCategory.LIMITED_SIZE.id, ModernBetaSettingsPresetCategory.LIMITED_SIZE);
+        ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.register(ModernBetaBuiltInTypes.PresetCategory.FINITE.id, ModernBetaSettingsPresetCategory.FINITE);
         ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.register(ModernBetaBuiltInTypes.PresetCategory.EARLY_RELEASE.id, ModernBetaSettingsPresetCategory.EARLY_RELEASE);
         ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.register(ModernBetaBuiltInTypes.PresetCategory.EARLY_RELEASE_LARGE_BIOMES.id, ModernBetaSettingsPresetCategory.EARLY_RELEASE_LARGE_BIOMES);
         ModernBetaRegistries.SETTINGS_PRESET_CATEGORY.register(ModernBetaBuiltInTypes.PresetCategory.MAJOR_RELEASE.id, ModernBetaSettingsPresetCategory.MAJOR_RELEASE);

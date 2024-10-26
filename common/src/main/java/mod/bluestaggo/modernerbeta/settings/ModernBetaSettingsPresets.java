@@ -1406,9 +1406,6 @@ public class ModernBetaSettingsPresets {
         settingsChunk.chunkProvider = ModernBetaBuiltInTypes.Chunk.EARLY_RELEASE.id;
         settingsChunk.useFixedCaves = true;
         settingsChunk.releaseHeightOverrides = Map.ofEntries(
-            Map.entry("example:flat_biome", "-0.2;0.1"),
-            Map.entry("*example:flat_biome", "-0.1;0.5"),
-            Map.entry("2*example:flat_biome", "0.1;1.0"),
             Map.entry("minecraft:ocean", "-1.0;0.5")
         );
 
@@ -1420,6 +1417,12 @@ public class ModernBetaSettingsPresets {
             "moderner_beta:late_beta_swampland",
             "moderner_beta:late_beta_plains",
             "moderner_beta:late_beta_taiga"
+        );
+        settingsBiome.fractalHillVariants = Map.ofEntries(
+            Map.entry("minecraft:desert", "*minecraft:desert"),
+            Map.entry("minecraft:forest", "*minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_plains", "minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_taiga", "*moderner_beta:late_beta_taiga")
         );
         settingsBiome.fractalIcePlains = "moderner_beta:late_beta_ice_plains";
 
@@ -1446,6 +1449,13 @@ public class ModernBetaSettingsPresets {
             "moderner_beta:early_release_swampland",
             "moderner_beta:late_beta_plains",
             "moderner_beta:late_beta_taiga"
+        );
+        settingsBiome.fractalHillVariants = Map.ofEntries(
+            Map.entry("minecraft:desert", "*minecraft:desert"),
+            Map.entry("minecraft:forest", "*minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_plains", "minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_taiga", "*moderner_beta:late_beta_taiga"),
+            Map.entry("moderner_beta:late_beta_ice_plains", "*moderner_beta:late_beta_ice_plains")
         );
         settingsBiome.fractalIcePlains = "moderner_beta:late_beta_ice_plains";
         settingsBiome.fractalTerrainType = FractalSettings.TerrainType.EARLY_RELEASE.id;
@@ -1476,6 +1486,13 @@ public class ModernBetaSettingsPresets {
             "moderner_beta:late_beta_plains",
             "moderner_beta:late_beta_taiga"
         );
+        settingsBiome.fractalHillVariants = Map.ofEntries(
+            Map.entry("minecraft:desert", "*minecraft:desert"),
+            Map.entry("minecraft:forest", "*minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_plains", "minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_taiga", "*moderner_beta:late_beta_taiga"),
+            Map.entry("moderner_beta:early_release_ice_plains", "*moderner_beta:early_release_ice_plains")
+        );
         settingsBiome.fractalTerrainType = FractalSettings.TerrainType.EARLY_RELEASE.id;
         settingsBiome.fractalAddSnow = true;
         settingsBiome.fractalAddMushroomIslands = true;
@@ -1503,6 +1520,13 @@ public class ModernBetaSettingsPresets {
             "moderner_beta:early_release_swampland",
             "moderner_beta:late_beta_plains",
             "moderner_beta:early_release_taiga"
+        );
+        settingsBiome.fractalHillVariants = Map.ofEntries(
+            Map.entry("minecraft:desert", "*minecraft:desert"),
+            Map.entry("minecraft:forest", "*minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_plains", "minecraft:forest"),
+            Map.entry("moderner_beta:early_release_taiga", "*moderner_beta:early_release_taiga"),
+            Map.entry("moderner_beta:early_release_ice_plains", "*moderner_beta:early_release_ice_plains")
         );
         settingsBiome.fractalTerrainType = FractalSettings.TerrainType.EARLY_RELEASE.id;
         settingsBiome.fractalAddSnow = true;
@@ -1536,6 +1560,14 @@ public class ModernBetaSettingsPresets {
             "moderner_beta:early_release_taiga",
             "minecraft:jungle"
         );
+        settingsBiome.fractalHillVariants = Map.ofEntries(
+            Map.entry("minecraft:desert", "*minecraft:desert"),
+            Map.entry("minecraft:forest", "*minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_plains", "minecraft:forest"),
+            Map.entry("moderner_beta:early_release_taiga", "*moderner_beta:early_release_taiga"),
+            Map.entry("moderner_beta:early_release_ice_plains", "*moderner_beta:early_release_ice_plains"),
+            Map.entry("minecraft:jungle", "*minecraft:jungle")
+        );
         settingsBiome.fractalTerrainType = FractalSettings.TerrainType.EARLY_RELEASE.id;
         settingsBiome.fractalAddSnow = true;
         settingsBiome.fractalAddMushroomIslands = true;
@@ -1560,10 +1592,10 @@ public class ModernBetaSettingsPresets {
         settingsChunk.releaseHeightOverrides = Map.ofEntries(
             Map.entry("*minecraft:desert", "0.3;0.8"),
             Map.entry("*minecraft:forest", "0.3;0.7"),
-            Map.entry("minecraft:early_release_extreme_hills", "0.3;1.5"),
-            Map.entry("*minecraft:early_release_ice_plains", "0.3;1.3"),
+            Map.entry("moderner_beta:early_release_extreme_hills", "0.3;1.5"),
+            Map.entry("*moderner_beta:early_release_ice_plains", "0.3;1.3"),
             Map.entry("*minecraft:jungle", "1.8;0.5"),
-            Map.entry("*minecraft:early_release_taiga", "0.3;0.8")
+            Map.entry("*moderner_beta:early_release_taiga", "0.3;0.8")
         );
 
         settingsBiome.biomeProvider = ModernBetaBuiltInTypes.Biome.FRACTAL.id;
@@ -1576,16 +1608,26 @@ public class ModernBetaSettingsPresets {
             "moderner_beta:early_release_taiga",
             "minecraft:jungle"
         );
+        settingsBiome.fractalHillVariants = Map.ofEntries(
+            Map.entry("minecraft:desert", "*minecraft:desert"),
+            Map.entry("minecraft:forest", "*minecraft:forest"),
+            Map.entry("moderner_beta:late_beta_plains", "minecraft:forest"),
+            Map.entry("moderner_beta:early_release_taiga", "*moderner_beta:early_release_taiga"),
+            Map.entry("moderner_beta:early_release_ice_plains", "*moderner_beta:early_release_ice_plains"),
+            Map.entry("minecraft:jungle", "*minecraft:jungle")
+        );
         settingsBiome.fractalTerrainType = FractalSettings.TerrainType.EARLY_RELEASE.id;
         settingsBiome.fractalSubVariants = Map.ofEntries(
-            Map.entry("moderner_beta:early_release_ice_plains", List.of(
-                "moderner_beta:early_release_ice_plains",
-                "moderner_beta:early_release_ice_plains",
-                "moderner_beta:early_release_ice_plains",
-                "moderner_beta:early_release_ice_plains",
-                "moderner_beta:early_release_ice_plains",
-                "moderner_beta:early_release_taiga",
-                "moderner_beta:early_release_ice_plains"
+            Map.entry("0", Map.ofEntries(
+                Map.entry("moderner_beta:early_release_ice_plains", List.of(
+                    "moderner_beta:early_release_ice_plains",
+                    "moderner_beta:early_release_ice_plains",
+                    "moderner_beta:early_release_ice_plains",
+                    "moderner_beta:early_release_ice_plains",
+                    "moderner_beta:early_release_ice_plains",
+                    "moderner_beta:early_release_taiga",
+                    "moderner_beta:early_release_ice_plains"
+                ))
             ))
         );
         settingsBiome.fractalSubVariantScale = 0;
@@ -1638,9 +1680,13 @@ public class ModernBetaSettingsPresets {
             Map.entry("*minecraft:bamboo_jungle", "0.45;0.6"),
             Map.entry("minecraft:sparse_jungle", "0.1;0.4"),
             Map.entry("minecraft:deep_ocean", "-1.8;0.2"),
+            Map.entry("*minecraft:deep_ocean", "-1.8;0.2"),
             Map.entry("minecraft:deep_lukewarm_ocean", "-1.8;0.2"),
+            Map.entry("*minecraft:deep_lukewarm_ocean", "-1.8;0.2"),
             Map.entry("minecraft:deep_cold_ocean", "-1.8;0.2"),
+            Map.entry("*minecraft:deep_cold_ocean", "-1.8;0.2"),
             Map.entry("minecraft:deep_frozen_ocean", "-1.8;0.2"),
+            Map.entry("*minecraft:deep_frozen_ocean", "-1.8;0.2"),
             Map.entry("minecraft:stony_shore", "0.1;1.6"),
             Map.entry("minecraft:snowy_beach", "0.0;0.05"),
             Map.entry("minecraft:birch_forest", "0.1;0.4"),
@@ -1739,9 +1785,13 @@ public class ModernBetaSettingsPresets {
             Map.entry("*minecraft:bamboo_jungle", "0.45;0.6"),
             Map.entry("minecraft:sparse_jungle", "0.1;0.4"),
             Map.entry("minecraft:deep_ocean", "-1.8;0.2"),
+            Map.entry("*minecraft:deep_ocean", "-1.8;0.2"),
             Map.entry("minecraft:deep_lukewarm_ocean", "-1.8;0.2"),
+            Map.entry("*minecraft:deep_lukewarm_ocean", "-1.8;0.2"),
             Map.entry("minecraft:deep_cold_ocean", "-1.8;0.2"),
+            Map.entry("*minecraft:deep_cold_ocean", "-1.8;0.2"),
             Map.entry("minecraft:deep_frozen_ocean", "-1.8;0.2"),
+            Map.entry("*minecraft:deep_frozen_ocean", "-1.8;0.2"),
             Map.entry("minecraft:stony_shore", "0.1;1.6"),
             Map.entry("minecraft:snowy_beach", "0.0;0.05"),
             Map.entry("minecraft:birch_forest", "0.1;0.4"),
@@ -1789,20 +1839,21 @@ public class ModernBetaSettingsPresets {
             Map.entry("minecraft:plains", "minecraft:sunflower_plains")
         );
         settingsBiome.fractalSubVariants = Map.ofEntries(
-            Map.entry("minecraft:jungle", List.of(
-                "minecraft:bamboo_jungle",
-                "minecraft:jungle",
-                "minecraft:jungle",
-                "minecraft:jungle",
-                "minecraft:jungle",
-                "minecraft:jungle",
-                "minecraft:jungle",
-                "minecraft:jungle",
-                "minecraft:jungle",
-                "minecraft:jungle"
+            Map.entry("0", Map.ofEntries(
+                Map.entry("minecraft:jungle", List.of(
+                    "minecraft:bamboo_jungle",
+                    "minecraft:jungle",
+                    "minecraft:jungle",
+                    "minecraft:jungle",
+                    "minecraft:jungle",
+                    "minecraft:jungle",
+                    "minecraft:jungle",
+                    "minecraft:jungle",
+                    "minecraft:jungle",
+                    "minecraft:jungle"
+                ))
             ))
         );
-        settingsBiome.fractalSubVariantScale = 0;
         settingsBiome.fractalSubVariantSeed = 1001;
         settingsBiome.fractalPlains = "minecraft:plains";
         settingsBiome.fractalIcePlains = "minecraft:snowy_plains";
@@ -1852,16 +1903,6 @@ public class ModernBetaSettingsPresets {
         settingsChunk.useSurfaceRules = true;
 
         settingsBiome.biomeProvider = ModernBetaBuiltInTypes.Biome.FRACTAL.id;
-
-//        settingsBiome.fractalBiomes = List.of(
-//            "minecraft:desert",
-//            "minecraft:forest",
-//            "moderner_beta:early_release_extreme_hills",
-//            "moderner_beta:early_release_swampland",
-//            "moderner_beta:late_beta_plains",
-//            "moderner_beta:early_release_taiga",
-//            "minecraft:jungle"
-//        );
 
         settingsBiome.fractalBiomes = List.of(
             // Deserts
@@ -1934,28 +1975,30 @@ public class ModernBetaSettingsPresets {
             Map.entry("*minecraft:badlands", "minecraft:badlands")
         );
         settingsBiome.fractalSubVariants = Map.ofEntries(
-            Map.entry("minecraft:snowy_plains", List.of(
-                "minecraft:snowy_plains",
-                "minecraft:snowy_plains",
-                "minecraft:snowy_plains",
-                "minecraft:snowy_taiga"
-            )),
-            Map.entry("minecraft:savanna", List.of(
-                "minecraft:savanna",
-                "minecraft:savanna",
-                "minecraft:windswept_savanna",
-                "minecraft:savanna",
-                "minecraft:savanna"
-            )),
-            Map.entry("*minecraft:badlands", List.of(
-                "*minecraft:wooded_badlands",
-                "*minecraft:badlands",
-                "*minecraft:badlands"
-            )),
-            Map.entry("*minecraft:birch_forest", List.of(
-                "*minecraft:wooded_badlands",
-                "*minecraft:badlands",
-                "*minecraft:badlands"
+            Map.entry("1", Map.ofEntries(
+                Map.entry("minecraft:snowy_plains", List.of(
+                    "minecraft:snowy_plains",
+                    "minecraft:snowy_plains",
+                    "minecraft:snowy_plains",
+                    "minecraft:snowy_taiga"
+                )),
+                Map.entry("minecraft:savanna", List.of(
+                    "minecraft:savanna",
+                    "minecraft:savanna",
+                    "minecraft:windswept_savanna",
+                    "minecraft:savanna",
+                    "minecraft:savanna"
+                )),
+                Map.entry("*minecraft:badlands", List.of(
+                    "*minecraft:wooded_badlands",
+                    "*minecraft:badlands",
+                    "*minecraft:badlands"
+                )),
+                Map.entry("minecraft:birch_forest", List.of(
+                    "minecraft:old_growth_birch_forest",
+                    "minecraft:birch_forest",
+                    "minecraft:birch_forest"
+                ))
             ))
         );
         settingsBiome.fractalMutatedVariants = Map.ofEntries(
@@ -1973,7 +2016,6 @@ public class ModernBetaSettingsPresets {
         );
         settingsBiome.fractalPlains = "minecraft:plains";
         settingsBiome.fractalIcePlains = "minecraft:snowy_plains";
-        settingsBiome.fractalSubVariantScale = 1;
         settingsBiome.fractalTerrainType = FractalSettings.TerrainType.EARLY_RELEASE.id;
         settingsBiome.fractalOceanShrink = 1;
         settingsBiome.fractalAddSnow = true;

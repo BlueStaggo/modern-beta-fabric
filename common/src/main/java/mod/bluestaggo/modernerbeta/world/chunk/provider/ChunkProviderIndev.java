@@ -378,15 +378,15 @@ public class ChunkProviderIndev extends ChunkProviderFinite {
                 double gravelBeachThreshold = this.chunkSettings.indevGravelBeachThreshold;
 
                 if (this.levelType == IndevType.ISLAND) {
-                    sandBeachThreshold = -8.0;
+                    sandBeachThreshold -= 16.0;
                 }
 
                 if (this.levelTheme == IndevTheme.PARADISE) {
-                    sandBeachThreshold = -32.0;
+                    sandBeachThreshold -= 40.0;
                 }
 
                 if (this.levelTheme == IndevTheme.HELL || this.levelTheme == IndevTheme.WOODS) {
-                    sandBeachThreshold = -8.0;
+                    sandBeachThreshold -= 16.0;
                 }
 
                 boolean genSand = sandOctaveNoise.sampleXY(x, z) > sandBeachThreshold;

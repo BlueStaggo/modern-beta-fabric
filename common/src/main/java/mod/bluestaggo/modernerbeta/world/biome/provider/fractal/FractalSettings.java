@@ -1,5 +1,7 @@
 package mod.bluestaggo.modernerbeta.world.biome.provider.fractal;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import mod.bluestaggo.modernerbeta.util.NbtCompoundBuilder;
 import mod.bluestaggo.modernerbeta.util.NbtListBuilder;
 import mod.bluestaggo.modernerbeta.util.NbtReader;
@@ -21,12 +23,11 @@ public class FractalSettings {
     public final Map<BiomeInfo, BiomeInfo> edgeVariants;
     public final Map<BiomeInfo, BiomeInfo> mutatedVariants;
     public final Map<BiomeInfo, BiomeInfo> veryRareVariants;
-    public final Map<BiomeInfo, List<BiomeInfo>> subVariants;
+    public final Int2ObjectMap<Map<BiomeInfo, List<BiomeInfo>>> subVariants;
 	public final RegistryEntry<Biome> plains;
 	public final RegistryEntry<Biome> icePlains;
 	public final int biomeScale;
 	public final int hillScale;
-	public final int subVariantScale;
 	public final int subVariantSeed;
 	public final int beachShrink;
 	public final int oceanShrink;
@@ -55,7 +56,6 @@ public class FractalSettings {
 		this.icePlains = builder.icePlains;
 		this.biomeScale = builder.biomeScale;
 		this.hillScale = builder.hillScale;
-		this.subVariantScale = builder.subVariantScale;
 		this.subVariantSeed = builder.subVariantSeed;
 		this.beachShrink = builder.beachShrink;
 		this.oceanShrink = builder.oceanShrink;
@@ -131,6 +131,25 @@ public class FractalSettings {
 		return builder.build();
 	}
 
+	public static Map<String, Map<String, List<String>>> subVariantsFromReader(String tag, NbtReader reader, Map<String, Map<String, List<String>>> alternate) {
+		if (reader.contains(tag)) {
+			Map<String, Map<String, List<String>>> map = new HashMap<>();
+			NbtCompound compound = reader.readCompoundOrThrow(tag);
+			NbtReader compoundReader = new NbtReader(compound);
+			compound.getKeys().forEach(key -> map.put(key, mapOfListFromReader(key, compoundReader, alternate.get(key))));
+			return map;
+		}
+
+		return Map.copyOf(alternate);
+	}
+
+	public static NbtCompound subVariantsToNbt(Map<String, Map<String, List<String>>> subVariants) {
+		NbtCompoundBuilder builder = new NbtCompoundBuilder();
+		subVariants.forEach((k, v) -> builder.putCompound(k, mapOfListToNbt(v)));
+
+		return builder.build();
+	}
+
 	public static class Builder {
 	    public List<BiomeInfo> biomes;
 	    public List<ClimaticBiomeList<BiomeInfo>> climaticBiomes;
@@ -138,12 +157,11 @@ public class FractalSettings {
 	    public Map<BiomeInfo, BiomeInfo> edgeVariants;
 	    public Map<BiomeInfo, BiomeInfo> mutatedVariants;
 	    public Map<BiomeInfo, BiomeInfo> veryRareVariants;
-	    public Map<BiomeInfo, List<BiomeInfo>> subVariants;
+	    public Int2ObjectMap<Map<BiomeInfo, List<BiomeInfo>>> subVariants;
 		public RegistryEntry<Biome> plains;
 		public RegistryEntry<Biome> icePlains;
 		public int biomeScale;
 		public int hillScale;
-		public int subVariantScale;
 		public int subVariantSeed;
 		public int beachShrink;
 		public int oceanShrink;
@@ -166,12 +184,11 @@ public class FractalSettings {
 			this.edgeVariants = Map.of();
 			this.mutatedVariants = Map.of();
 			this.veryRareVariants = Map.of();
-			this.subVariants = Map.of();
+			this.subVariants = Int2ObjectMaps.emptyMap();
 			this.plains = null;
 			this.icePlains = null;
 			this.biomeScale = 4;
 			this.hillScale = 2;
-			this.subVariantScale = 2;
 			this.subVariantSeed = 3000;
 			this.beachShrink = 1;
 			this.oceanShrink = 0;
@@ -197,13 +214,17 @@ public class FractalSettings {
 	public enum TerrainType {
 		BETA("beta"),
 		EARLY_RELEASE("early_release"),
-		MAJOR_RELEASE("major_release")
+		MAJOR_RELEASE("major_release"),
         ;
 
 		public final String id;
 
 		private TerrainType(String id) {
 			this.id = id;
+		}
+
+		public String getId() {
+			return id;
 		}
 
 		public static TerrainType fromString(String id) {
