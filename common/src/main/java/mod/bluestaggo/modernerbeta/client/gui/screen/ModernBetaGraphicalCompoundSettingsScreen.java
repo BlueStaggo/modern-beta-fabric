@@ -227,7 +227,7 @@ public abstract class ModernBetaGraphicalCompoundSettingsScreen extends ModernBe
     protected SimpleOption<String> blockOption(String key) {
         return this.stringOption(key, new TextFieldCallbacks(
             value -> Registries.BLOCK.containsId(Identifier.tryParse(value)),
-            value -> Identifier.validate(key).isSuccess()
+            value -> Identifier.validate(value).isSuccess()
         ));
     }
 
