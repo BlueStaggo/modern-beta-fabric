@@ -1,9 +1,12 @@
 package mod.bluestaggo.modernerbeta.client.gui.screen;
 
 import mod.bluestaggo.modernerbeta.client.gui.optioncallbacks.*;
+import mod.bluestaggo.modernerbeta.imixin.ModernBetaClearableWidget;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.GridWidget;
 import net.minecraft.client.gui.widget.OptionListWidget;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.world.GeneratorOptionsHolder;
@@ -15,7 +18,7 @@ import net.minecraft.util.Formatting;
 
 import java.util.function.Consumer;
 
-public abstract class ModernBetaGraphicalSettingsScreen<T extends NbtElement> extends ModernBetaScreen {
+public abstract class ModernBetaGraphicalSettingsScreen<T extends NbtElement> extends GameOptionsScreen {
     protected static final String STRING_PREFIX = "createWorld.customize.modern_beta.settings.";
 
     protected final T settings;
@@ -23,7 +26,6 @@ public abstract class ModernBetaGraphicalSettingsScreen<T extends NbtElement> ex
     protected final Consumer<T> onDone;
     protected final String type;
 
-    private OptionListWidget list;
     private double prevScroll = -1.0D;
 
     public ModernBetaGraphicalSettingsScreen(
@@ -34,7 +36,7 @@ public abstract class ModernBetaGraphicalSettingsScreen<T extends NbtElement> ex
         T settings,
         Consumer<T> onDone
     ) {
-        super(Text.translatable(title), parent);
+        super(parent, null, Text.translatable(title));
 
         this.onDone = onDone;
         this.type = type;
@@ -45,26 +47,44 @@ public abstract class ModernBetaGraphicalSettingsScreen<T extends NbtElement> ex
     protected abstract void addOptions(OptionListWidget list);
 
     @Override
-    protected void clearChildren() {
-        if (this.list != null) {
-            this.prevScroll = this.list.getScrollAmount();
-        }
-
-        super.clearChildren();
+    protected void addOptions() {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    public void removed() {
+    }
 
-        this.list = new OptionListWidget(this.client, this.width, this.height, 32, this.height - 32, 25);
-        this.addOptions(this.list);
-        this.addSelectableChild(this.list);
-        if (this.prevScroll >= 0.0D) {
-            this.list.setScrollAmount(this.prevScroll);
+    @Override
+    public void close() {
+        this.client.setScreen(null);
+    }
+
+    @Override
+    protected void clearChildren() {
+        if (this.body != null) {
+            this.prevScroll = this.body.getScrollAmount();
         }
 
-        this.addDrawableChild(ButtonWidget.builder(
+        super.clearChildren();
+
+        ((ModernBetaClearableWidget)this.layout).modernBeta$clear();
+    }
+
+    @Override
+    protected void initBody() {
+        this.body = this.layout.addBody(new OptionListWidget(this.client, this.width, this));
+        this.addOptions(this.body);
+        if (this.prevScroll >= 0.0D && this.body != null) {
+            this.body.setScrollAmount(this.prevScroll);
+        }
+    }
+
+    @Override
+    protected void initFooter() {
+        GridWidget gridWidget = new GridWidget().setColumnSpacing(8);
+        GridWidget.Adder gridWidgetAdder = gridWidget.createAdder(2);
+
+        gridWidgetAdder.add(ButtonWidget.builder(
             Text.translatable("createWorld.customize.modern_beta.settings.save"),
             onPress -> {
                 this.onDone.accept(this.getResult());
@@ -72,20 +92,16 @@ public abstract class ModernBetaGraphicalSettingsScreen<T extends NbtElement> ex
             }
         ).dimensions(this.width / 2 - 155, this.height - 28, 150, 20).build());
 
-        this.addDrawableChild(ButtonWidget.builder(
+        gridWidgetAdder.add(ButtonWidget.builder(
             ScreenTexts.CANCEL,
             onPress -> this.client.setScreen(this.parent)
         ).dimensions(this.width / 2 + 5, this.height - 28, 150, 20).build());
+
+        this.layout.addFooter(gridWidget);
     }
 
     protected T getResult() {
         return this.settings;
-    }
-
-    @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
-        this.list.render(context, mouseX, mouseY, delta);
     }
 
     protected String getTextKey(String key) {

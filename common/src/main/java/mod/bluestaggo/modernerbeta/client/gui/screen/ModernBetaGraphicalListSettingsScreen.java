@@ -64,7 +64,7 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
                 SimpleOption<?> right = options.get(j + 1);
 
                 if (right != null) {
-                    list.addOptionEntry(left, right);
+                    list.addAll(left, right);
                 } else {
                     list.addSingleOptionEntry(left);
                 }
@@ -91,6 +91,7 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
             value -> {
                 settings.remove(i);
                 settings.add(i, NbtString.of(value));
+                this.clearAndInit();
             }
         );
     }
@@ -102,7 +103,10 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
             (optionText, value) -> Text.of(settings.getCompound(i).getString(subKey)),
             new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder),
             settings.getCompound(i).getString(subKey),
-            value -> settings.getCompound(i).put(subKey, NbtString.of(value))
+            value -> {
+                settings.getCompound(i).put(subKey, NbtString.of(value));
+                this.clearAndInit();
+            }
         );
     }
 
@@ -141,6 +145,7 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
                     NbtElement removedElement = settings.remove(i);
                     int removedType = BiomeInfo.parse(removedElement.asString()).getRight();
                     settings.add(i, NbtString.of(BiomeInfo.makeString(value, removedType)));
+                    this.clearAndInit();
                 }
             )
         );

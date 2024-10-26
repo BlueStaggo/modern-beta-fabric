@@ -227,7 +227,7 @@ public abstract class ModernBetaGraphicalCompoundSettingsScreen extends ModernBe
     protected SimpleOption<String> blockOption(String key) {
         return this.stringOption(key, new TextFieldCallbacks(
             value -> Registries.BLOCK.containsId(Identifier.tryParse(value)),
-            Identifier::isValid
+            value -> Identifier.validate(key).isSuccess()
         ));
     }
 
@@ -242,7 +242,10 @@ public abstract class ModernBetaGraphicalCompoundSettingsScreen extends ModernBe
             (optionText, value) -> Text.of(settings.getString(subKey)),
             new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder),
             settings.getString(subKey),
-            value -> settings.putString(subKey, value)
+            value -> {
+                settings.putString(subKey, value);
+                this.clearAndInit();
+            }
         );
     }
 
@@ -276,6 +279,7 @@ public abstract class ModernBetaGraphicalCompoundSettingsScreen extends ModernBe
                     String replacedString = replacedElement != null ? replacedElement.asString() : "";
                     int replacedType = BiomeInfo.parse(replacedString).getRight();
                     settings.putString(subKey, BiomeInfo.makeString(value, replacedType));
+                    this.clearAndInit();
                 }
             )
         );

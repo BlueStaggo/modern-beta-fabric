@@ -81,7 +81,7 @@ public class ModernBetaGraphicalChunkSettingsScreen extends ModernBetaGraphicalC
 
         list.addSingleOptionEntry(this.headerOption(this.getText("header.generic").formatted(Formatting.BOLD)));
 
-        list.addAll(new SimpleOption[] {
+        list.addAll(
             this.booleanOption(NbtTags.USE_DEEPSLATE),
             this.intRangeOption(NbtTags.DEEPSLATE_MIN_Y, minY, maxY),
             this.intRangeOption(NbtTags.DEEPSLATE_MAX_Y, minY, maxY),
@@ -91,8 +91,8 @@ public class ModernBetaGraphicalChunkSettingsScreen extends ModernBetaGraphicalC
                 new SimpleOption.ValidatingIntSliderCallbacks(minY - seaLevel, maxY - seaLevel),
                 (optionText, value) -> GameOptions.getGenericValueText(this.getText(NbtTags.SEA_LEVEL_OFFSET), value + seaLevel)
             )
-        });
-        list.addOptionEntry(this.headerOption(this.getText(NbtTags.DEEPSLATE_BLOCK)), this.blockOption(NbtTags.DEEPSLATE_BLOCK));
+        );
+        list.addAll(this.headerOption(this.getText(NbtTags.DEEPSLATE_BLOCK)), this.blockOption(NbtTags.DEEPSLATE_BLOCK));
 
         var structureOptionList = new ArrayList<SimpleOption<?>>();
 
@@ -169,7 +169,7 @@ public class ModernBetaGraphicalChunkSettingsScreen extends ModernBetaGraphicalC
 
         if (isFiniteProvider) {
             list.addSingleOptionEntry(this.headerOption(this.getText("header.feature").formatted(Formatting.BOLD)));
-            list.addAll(new SimpleOption[] {
+            list.addAll(
                 this.floatRangeOption(NbtTags.INDEV_SAND_BEACH_THRESHOLD, -32.0F, 32.0F),
                 this.booleanOption(NbtTags.INDEV_SAND_BEACH_UNDER_AIR),
                 this.booleanOption(NbtTags.INDEV_SAND_BEACH_UNDER_FLUID),
@@ -177,24 +177,24 @@ public class ModernBetaGraphicalChunkSettingsScreen extends ModernBetaGraphicalC
                 this.booleanOption(NbtTags.INDEV_GRAVEL_BEACH_UNDER_AIR),
                 this.booleanOption(NbtTags.INDEV_GRAVEL_BEACH_UNDER_FLUID),
                 this.intRangeOption(NbtTags.INDEV_WATER_RARITY, 1000, 50000, 1000),
-                this.intRangeOption(NbtTags.INDEV_LAVA_RARITY, 1000, 50000, 1000),
-            });
+                this.intRangeOption(NbtTags.INDEV_LAVA_RARITY, 1000, 50000, 1000)
+            );
 
             list.addSingleOptionEntry(this.headerOption(this.getText("header.noise").formatted(Formatting.BOLD)));
-            list.addAll(new SimpleOption[] {
+            list.addAll(
                 this.floatRangeOption(NbtTags.INDEV_NOISE_SCALE, 0.01F, 10.0F),
                 this.floatRangeOption(NbtTags.INDEV_SELECTOR_SCALE, 0.01F, 10.0F),
                 this.floatRangeOption(NbtTags.INDEV_MIN_HEIGHT_DAMP, 0.01F, 25.0F),
                 this.floatRangeOption(NbtTags.INDEV_MIN_HEIGHT_BOOST, -50.0F, 50.0F),
                 this.floatRangeOption(NbtTags.INDEV_MAX_HEIGHT_DAMP, 0.01F, 25.0F),
                 this.floatRangeOption(NbtTags.INDEV_MAX_HEIGHT_BOOST, -50.0F, 50.0F),
-                this.floatRangeOption(NbtTags.INDEV_HEIGHT_UNDER_DAMP, 0.01F, 5.0F),
-            });
+                this.floatRangeOption(NbtTags.INDEV_HEIGHT_UNDER_DAMP, 0.01F, 5.0F)
+            );
         }
 
         if (isNoiseProvider) {
             list.addSingleOptionEntry(this.headerOption(this.getText("header.isles").formatted(Formatting.BOLD)));
-            list.addAll(new SimpleOption[] {
+            list.addAll(
                 this.booleanOption(NbtTags.ISLES_USE_ISLANDS),
                 this.booleanOption(NbtTags.ISLES_USE_OUTER_ISLANDS),
                 this.floatRangeOption(NbtTags.ISLES_OCEAN_SLIDE_TARGET, -1000.0F, 0.0F),
@@ -207,8 +207,8 @@ public class ModernBetaGraphicalChunkSettingsScreen extends ModernBetaGraphicalC
                 this.intRangeOption(NbtTags.ISLES_CENTER_OCEAN_RADIUS, 1, 100),
                 this.intRangeOption(NbtTags.ISLES_CENTER_OCEAN_FALLOFF_DIST, 1, 100),
                 this.floatRangeOption(NbtTags.ISLES_OUTER_ISLAND_NOISE_SCALE, 0.01F, 5000.0F),
-                this.floatRangeOption(NbtTags.ISLES_OUTER_ISLAND_NOISE_OFFSET, -1.0F, 1.0F),
-            });
+                this.floatRangeOption(NbtTags.ISLES_OUTER_ISLAND_NOISE_OFFSET, -1.0F, 1.0F)
+            );
         }
     }
 

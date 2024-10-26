@@ -61,25 +61,4 @@ public abstract class ModernBetaScreen extends Screen {
         adder.add(buttonWidget);
         adder.add(buttonWidget2);
     }
-
-    protected void renderBackgroundOverlay(DrawContext context) {
-        context.setShaderColor(0.125f, 0.125f, 0.125f, 1.0f);
-        context.drawTexture(Screen.OPTIONS_BACKGROUND_TEXTURE, this.overlayLeft, this.overlayTop, this.overlayRight, this.overlayBottom, this.overlayRight - this.overlayLeft, this.overlayBottom - this.overlayTop, 32, 32);
-        context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-    }
-
-    protected void renderBackgroundGradient(DrawContext context) {
-        context.setShaderColor(0.25f, 0.25f, 0.25f, 1.0f);
-        context.drawTexture(Screen.OPTIONS_BACKGROUND_TEXTURE, this.overlayLeft, 0, -100, 0.0f, 0.0f, this.width, this.overlayTop, 32, 32);
-        context.drawTexture(Screen.OPTIONS_BACKGROUND_TEXTURE, this.overlayLeft, this.overlayBottom, -100, 0.0f, this.overlayBottom, this.width, this.height - this.overlayBottom, 32, 32);
-        context.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        context.fillGradient(this.overlayLeft, this.overlayTop, this.overlayRight, this.overlayTop + 4, -16777216, 0);
-        context.fillGradient(this.overlayLeft, this.overlayBottom - 4, this.overlayRight, this.overlayBottom, 0, -16777216);
-    }
-
-    protected void renderBackgroundWithOverlay(DrawContext context) {
-        this.renderBackgroundTexture(context);
-        this.renderBackgroundOverlay(context);
-        this.renderBackgroundGradient(context);
-    }
 }
