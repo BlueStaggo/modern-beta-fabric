@@ -1,7 +1,7 @@
 package mod.bluestaggo.modernerbeta.client.gui.optioncallbacks;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.client.gui.screen.CustomizeBuffetLevelScreen;
+import net.minecraft.client.gui.screen.world.CustomizeBuffetLevelScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;

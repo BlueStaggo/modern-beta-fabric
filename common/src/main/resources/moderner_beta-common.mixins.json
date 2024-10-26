@@ -20,6 +20,8 @@
     "client.MixinCustomizeBuffetLevelScreen",
     "client.MixinDebugHud",
     "client.MixinLevelLoadingScreen",
+    "client.MixinSimplePositioningWidget",
+    "client.MixinThreePartsLayoutWidget",
     "client.MixinWorldCreator"
   ],
   "injectors": {

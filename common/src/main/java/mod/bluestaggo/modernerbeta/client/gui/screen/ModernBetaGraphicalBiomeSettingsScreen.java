@@ -49,7 +49,10 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                 .toArray(String[]::new)));
 
         if (ModernBetaBuiltInTypes.Biome.SINGLE.id.equals(biomeProvider)) {
-            list.addOptionEntry(this.headerOption(this.getText(NbtTags.SINGLE_BIOME)), this.biomeOption(NbtTags.SINGLE_BIOME));
+            list.addAll(
+                    this.headerOption(this.getText(NbtTags.SINGLE_BIOME)),
+                    this.biomeOption(NbtTags.SINGLE_BIOME)
+            );
         } else if (usesNoise) {
             var noiseOptionList = new ArrayList<SimpleOption<?>>(List.of(
                 this.booleanOption(NbtTags.USE_OCEAN_BIOMES),
@@ -75,19 +78,19 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                 for (String climateMapping : CLIMATE_MAPPINGS) {
                     String prefix = NbtTags.CLIMATE_MAPPINGS + ".";
                     list.addSingleOptionEntry(this.headerOption(this.getText(prefix + climateMapping).formatted(Formatting.BOLD)));
-                    list.addAll(new SimpleOption[]{
+                    list.addAll(
                         this.headerOption(this.getText(prefix + NbtTags.BIOME)),
                         this.biomeOption(prefix + climateMapping + "." + NbtTags.BIOME),
                         this.headerOption(this.getText(prefix + NbtTags.OCEAN_BIOME)),
                         this.biomeOption(prefix + climateMapping + "." + NbtTags.OCEAN_BIOME),
                         this.headerOption(this.getText(prefix + NbtTags.DEEP_OCEAN_BIOME)),
                         this.biomeOption(prefix + climateMapping + "." + NbtTags.DEEP_OCEAN_BIOME)
-                    });
+                    );
                 }
             }
         } else if (ModernBetaBuiltInTypes.Biome.FRACTAL.id.equals(biomeProvider)) {
             list.addSingleOptionEntry(this.headerOption(this.getText("header.scale").formatted(Formatting.BOLD)));
-            list.addAll(new SimpleOption[]{
+            list.addAll(
                 this.intRangeOption(NbtTags.FRACTAL_BIOME_SCALE, 1, 10),
                 this.intRangeOption(NbtTags.FRACTAL_HILL_SCALE, 1, 10),
                 this.intRangeOption(NbtTags.FRACTAL_BEACH_SHRINK, -5, 5),
@@ -96,10 +99,10 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                     Arrays.stream(FractalSettings.TerrainType.values())
                         .map(FractalSettings.TerrainType::getId)
                         .toArray(String[]::new))
-            });
+            );
 
             list.addSingleOptionEntry(this.headerOption(this.getText("header.features").formatted(Formatting.BOLD)));
-            list.addAll(new SimpleOption[] {
+            list.addAll(
                 this.booleanOption(NbtTags.FRACTAL_OCEANS),
                 this.booleanOption(NbtTags.FRACTAL_ADD_RIVERS),
                 this.booleanOption(NbtTags.FRACTAL_ADD_BEACHES),
@@ -108,11 +111,11 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                 this.booleanOption(NbtTags.FRACTAL_ADD_DEEP_OCEANS),
                 this.booleanOption(NbtTags.FRACTAL_ADD_SNOW),
                 this.booleanOption(NbtTags.FRACTAL_ADD_HILLS),
-                this.booleanOption(NbtTags.FRACTAL_ADD_MUTATIONS),
-            });
+                this.booleanOption(NbtTags.FRACTAL_ADD_MUTATIONS)
+            );
 
             list.addSingleOptionEntry(this.headerOption(this.getText("header.biomeLists").formatted(Formatting.BOLD)));
-            list.addAll(new SimpleOption[] {
+            list.addAll(
                 this.listEditButton(
                     this.getText(NbtTags.FRACTAL_BIOMES),
                     NbtTags.FRACTAL_BIOMES,
@@ -143,11 +146,11 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                     this.getText(NbtTags.FRACTAL_SUB_VARIANTS),
                     NbtTags.FRACTAL_SUB_VARIANTS,
                     IntegerToMapMapScreen::new
-                ),
-            });
+                )
+            );
 
             list.addSingleOptionEntry(this.headerOption(this.getText("header.climaticBiomes").formatted(Formatting.BOLD)));
-            list.addAll(new SimpleOption[] {
+            list.addAll(
                 this.booleanOption(NbtTags.FRACTAL_USE_CLIMATIC_BIOMES),
                 this.booleanOption(NbtTags.FRACTAL_ADD_CLIMATIC_OCEANS),
                 this.listEditButton(
@@ -197,16 +200,16 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                     NbtTags.FRACTAL_CLIMATIC_BIOMES + ".3.rare",
                     NbtElement.STRING_TYPE,
                     BiomeInfoListScreen::new
-                ),
-            });
+                )
+            );
 
             list.addSingleOptionEntry(this.headerOption(this.getText("header.individualBiomes").formatted(Formatting.BOLD)));
-            list.addAll(new SimpleOption[] {
+            list.addAll(
                 this.headerOption(this.getText(NbtTags.FRACTAL_PLAINS)),
                 this.biomeOption(NbtTags.FRACTAL_PLAINS),
                 this.headerOption(this.getText(NbtTags.FRACTAL_ICE_PLAINS)),
-                this.biomeOption(NbtTags.FRACTAL_ICE_PLAINS),
-            });
+                this.biomeOption(NbtTags.FRACTAL_ICE_PLAINS)
+            );
         }
     }
 
