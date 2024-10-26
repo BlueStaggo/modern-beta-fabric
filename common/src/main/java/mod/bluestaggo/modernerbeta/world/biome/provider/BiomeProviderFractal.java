@@ -1,5 +1,8 @@
 package mod.bluestaggo.modernerbeta.world.biome.provider;
 
+import it.unimi.dsi.fastutil.ints.AbstractInt2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMaps;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
@@ -17,10 +20,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BiomeProviderFractal extends BiomeProvider implements BiomeResolverBlock, BiomeResolverInfo {
@@ -41,7 +41,7 @@ public class BiomeProviderFractal extends BiomeProvider implements BiomeResolver
 		Map<BiomeInfo, BiomeInfo> edgeVariants = qualifyBiomeMap(biomeRegistry, this.settings.fractalEdgeVariants);
 		Map<BiomeInfo, BiomeInfo> mutatedVariants = qualifyBiomeMap(biomeRegistry, this.settings.fractalMutatedVariants);
 		Map<BiomeInfo, BiomeInfo> veryRareVariants = qualifyBiomeMap(biomeRegistry, this.settings.fractalVeryRareVariants);
-		Map<BiomeInfo, List<BiomeInfo>> subVariants = qualifySubVariants(biomeRegistry, this.settings.fractalSubVariants);
+		Int2ObjectMap<Map<BiomeInfo, List<BiomeInfo>>> subVariants = qualifySubVariants(biomeRegistry, this.settings.fractalSubVariants);
 
 		var allBiomes = new HashSet<RegistryEntry<Biome>>();
 		allBiomes.add(biomeRegistry.getOrThrow(BiomeKeys.OCEAN));
@@ -74,7 +74,9 @@ public class BiomeProviderFractal extends BiomeProvider implements BiomeResolver
 		} else {
 			selectedBiomes.stream().map(BiomeInfo::biome).forEach(allBiomes::add);
 		}
-		subVariants.values().forEach(v -> v.forEach(b -> allBiomes.add(b.biome())));
+		subVariants.values().forEach(v ->
+			v.values().forEach(bl ->
+				bl.forEach(b -> allBiomes.add(b.biome()))));
 		addBiomeMap(allBiomes, edgeVariants);
 		addBiomeMap(allBiomes, hillVariants);
 		addBiomeMap(allBiomes, mutatedVariants);
@@ -93,7 +95,6 @@ public class BiomeProviderFractal extends BiomeProvider implements BiomeResolver
 		fractalSettings.icePlains = getBiomeEntry(this.settings.fractalIcePlains);
 		fractalSettings.biomeScale = this.settings.fractalBiomeScale;
 		fractalSettings.hillScale = this.settings.fractalHillScale;
-		fractalSettings.subVariantScale = this.settings.fractalSubVariantScale;
 		fractalSettings.subVariantSeed = this.settings.fractalSubVariantSeed;
 		fractalSettings.beachShrink = this.settings.fractalBeachShrink;
 		fractalSettings.oceanShrink = this.settings.fractalOceanShrink;
@@ -125,11 +126,34 @@ public class BiomeProviderFractal extends BiomeProvider implements BiomeResolver
 			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
 
-	private static Map<BiomeInfo, List<BiomeInfo>> qualifySubVariants(RegistryEntryLookup<Biome> biomeRegistry, Map<String, List<String>> subVariants) {
-		return subVariants.entrySet().stream()
-			.map(kv -> Map.entry(BiomeInfo.fromId(kv.getKey(), biomeRegistry), kv.getValue().stream()
-				.map(v -> BiomeInfo.fromId(v, biomeRegistry)).toList()))
-			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+	private static Int2ObjectMap<Map<BiomeInfo, List<BiomeInfo>>> qualifySubVariants(RegistryEntryLookup<Biome> biomeRegistry, Map<String, Map<String, List<String>>> subVariants) {
+		var subVariantIterator = subVariants.entrySet().stream()
+			.map(kv -> {
+				try {
+					return new AbstractInt2ObjectMap.BasicEntry<>(
+						Integer.parseInt(kv.getKey()),
+						kv.getValue().entrySet().stream()
+							.map(kv2 ->
+								Map.entry(
+									BiomeInfo.fromId(kv2.getKey(), biomeRegistry),
+									kv2.getValue().stream()
+										.map(v -> BiomeInfo.fromId(v, biomeRegistry)).toList()
+								)
+							)
+							.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+					);
+				} catch (NumberFormatException ignored) {
+					return null;
+				}
+			})
+			.iterator();
+
+		Int2ObjectMap<Map<BiomeInfo, List<BiomeInfo>>> qualifiedSubVariants = new Int2ObjectOpenHashMap<>();
+        while (subVariantIterator.hasNext()) {
+			var subVariant = subVariantIterator.next();
+			qualifiedSubVariants.put(subVariant.getIntKey(), subVariant.getValue());
+		}
+		return qualifiedSubVariants;
 	}
 
 	private static void addBiomeMap(Set<RegistryEntry<Biome>> allBiomes, Map<BiomeInfo, BiomeInfo> biomes) {

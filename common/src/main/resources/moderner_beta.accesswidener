@@ -6,6 +6,10 @@ accessible class net/minecraft/world/gen/surfacebuilder/MaterialRules$SequenceMa
 extendable class net/minecraft/world/gen/chunk/NoiseChunkGenerator
 extendable class net/minecraft/world/gen/chunk/ChunkGenerator
 
+extendable class net/minecraft/client/option/SimpleOption$Callbacks
+extendable class net/minecraft/client/option/SimpleOption$SliderCallbacks
+extendable class net/minecraft/client/option/SimpleOption$IntSliderCallbacks
+
 accessible field net/minecraft/world/gen/carver/CaveCarverConfig floorLevel Lnet/minecraft/util/math/floatprovider/FloatProvider;
 
 accessible method net/minecraft/world/gen/stateprovider/SimpleBlockStateProvider <init>  (Lnet/minecraft/block/BlockState;)V

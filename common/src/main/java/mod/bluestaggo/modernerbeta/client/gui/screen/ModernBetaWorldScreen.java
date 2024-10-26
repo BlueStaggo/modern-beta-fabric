@@ -2,6 +2,7 @@ package mod.bluestaggo.modernerbeta.client.gui.screen;
 
 import mod.bluestaggo.modernerbeta.ModernBetaBuiltInTypes;
 import mod.bluestaggo.modernerbeta.api.registry.ModernBetaRegistries;
+import mod.bluestaggo.modernerbeta.settings.ModernBetaSettingsChunk;
 import mod.bluestaggo.modernerbeta.settings.ModernBetaSettingsPreset;
 import mod.bluestaggo.modernerbeta.world.biome.ModernBetaBiomeSource;
 import mod.bluestaggo.modernerbeta.world.chunk.ModernBetaChunkGenerator;
@@ -35,8 +36,9 @@ public class ModernBetaWorldScreen extends ModernBetaScreen {
     private static final String TEXT_CHUNK = "createWorld.customize.modern_beta.chunk";
     private static final String TEXT_BIOME = "createWorld.customize.modern_beta.biome";
     private static final String TEXT_CAVE_BIOME = "createWorld.customize.modern_beta.cave_biome";
-    
+
     private static final String TEXT_SETTINGS = "createWorld.customize.modern_beta.settings";
+    private static final String TEXT_SETTINGS_JSON = "createWorld.customize.modern_beta.settings.json";
     private static final String TEXT_SETTINGS_RESET = "createWorld.customize.modern_beta.settings.reset";
     private static final String TEXT_SETTINGS_RESET_MESSAGE = "createWorld.customize.modern_beta.settings.reset.message";
     //private static final String TEXT_INVALID_SETTINGS = "createWorld.customize.modern_beta.invalid_settings";
@@ -47,10 +49,11 @@ public class ModernBetaWorldScreen extends ModernBetaScreen {
     
     private final TriConsumer<NbtCompound, NbtCompound, NbtCompound> onDone;
     private final String hintString;
-    
+    private final GeneratorOptionsHolder generatorOptionsHolder;
+
     private ModernBetaSettingsPreset preset;
     private ButtonWidget buttonPreset;
-    
+
     public ModernBetaWorldScreen(Screen parent, GeneratorOptionsHolder generatorOptionsHolder, TriConsumer<NbtCompound, NbtCompound, NbtCompound> onDone) {
         super(Text.translatable(TEXT_TITLE), parent);
         
@@ -66,6 +69,7 @@ public class ModernBetaWorldScreen extends ModernBetaScreen {
             modernBetaBiomeSource.getBiomeSettings(),
             modernBetaBiomeSource.getCaveBiomeSettings()
         );
+        this.generatorOptionsHolder = generatorOptionsHolder;
     }
     
     public void setPreset(ModernBetaSettingsPreset preset) {
@@ -117,48 +121,87 @@ public class ModernBetaWorldScreen extends ModernBetaScreen {
                 true
             ))
         ).dimensions(0, 0, BUTTON_LENGTH_PRESET, BUTTON_HEIGHT_PRESET).build();
-        
+
         ButtonWidget buttonChunk = ButtonWidget.builder(
             Text.translatable(TEXT_SETTINGS),
+            button -> this.client.setScreen(new ModernBetaGraphicalChunkSettingsScreen(
+                TEXT_TITLE_CHUNK,
+                this,
+                this.generatorOptionsHolder,
+                this.preset.settingsChunk().toCompound(),
+                nbtCompound -> {
+                    Pair<ModernBetaSettingsPreset, Boolean> updatedPreset = this.preset.set(nbtCompound, null, null);
+                    this.preset = updatedPreset.getLeft();
+                }
+            ))
+        ).build();
+
+        ButtonWidget buttonChunkAdvanced = ButtonWidget.builder(
+            Text.translatable(TEXT_SETTINGS_JSON),
             button -> this.client.setScreen(new ModernBetaSettingsScreen(
                 TEXT_TITLE_CHUNK,
                 this,
                 this.preset.settingsChunk(),
                 string -> {
                     Pair<ModernBetaSettingsPreset, Boolean> updatedPreset = this.preset.set(string, "", "");
+                    this.preset = updatedPreset.getLeft();
+                }
+            ))
+        ).size(20, 20).build();
 
+        ButtonWidget buttonBiome = ButtonWidget.builder(
+            Text.translatable(TEXT_SETTINGS),
+            button -> this.client.setScreen(new ModernBetaGraphicalBiomeSettingsScreen(
+                TEXT_TITLE_CHUNK,
+                this,
+                this.generatorOptionsHolder,
+                this.preset.settingsBiome().toCompound(),
+                nbtCompound -> {
+                    Pair<ModernBetaSettingsPreset, Boolean> updatedPreset = this.preset.set(null, nbtCompound, null);
                     this.preset = updatedPreset.getLeft();
                 }
             ))
         ).build();
         
-        ButtonWidget buttonBiome = ButtonWidget.builder(
-            Text.translatable(TEXT_SETTINGS),
+        ButtonWidget buttonBiomeAdvanced = ButtonWidget.builder(
+            Text.translatable(TEXT_SETTINGS_JSON),
             button -> this.client.setScreen(new ModernBetaSettingsScreen(
                 TEXT_TITLE_BIOME,
                 this,
                 this.preset.settingsBiome(),
                 string -> {
                     Pair<ModernBetaSettingsPreset, Boolean> updatedPreset = this.preset.set("", string, "");
+                    this.preset = updatedPreset.getLeft();
+                }
+            ))
+        ).size(20, 20).build();
 
+        ButtonWidget buttonCaveBiome = ButtonWidget.builder(
+            Text.translatable(TEXT_SETTINGS),
+            button -> this.client.setScreen(new ModernBetaGraphicalCaveBiomeSettingsScreen(
+                TEXT_TITLE_CHUNK,
+                this,
+                this.generatorOptionsHolder,
+                this.preset.settingsCaveBiome().toCompound(),
+                nbtCompound -> {
+                    Pair<ModernBetaSettingsPreset, Boolean> updatedPreset = this.preset.set(null, null, nbtCompound);
                     this.preset = updatedPreset.getLeft();
                 }
             ))
         ).build();
         
-        ButtonWidget buttonCaveBiome = ButtonWidget.builder(
-            Text.translatable(TEXT_SETTINGS),
+        ButtonWidget buttonCaveBiomeAdvanced = ButtonWidget.builder(
+            Text.translatable(TEXT_SETTINGS_JSON),
             button -> this.client.setScreen(new ModernBetaSettingsScreen(
                 TEXT_TITLE_CAVE_BIOME,
                 this,
                 this.preset.settingsCaveBiome(),
                 string -> {
                     Pair<ModernBetaSettingsPreset, Boolean> updatedPreset = this.preset.set("", "", string);
-                    
                     this.preset = updatedPreset.getLeft();
                 }
             ))
-        ).build();
+        ).size(20, 20).build();
         
         ButtonWidget buttonReset = ButtonWidget.builder(
             Text.translatable(TEXT_SETTINGS_RESET),
@@ -174,16 +217,16 @@ public class ModernBetaWorldScreen extends ModernBetaScreen {
         GridWidget gridWidgetSettings = this.createGridWidget();
         
         GridWidget.Adder gridAdderMain = gridWidgetMain.createAdder(1);
-        GridWidget.Adder gridAdderSettings = gridWidgetSettings.createAdder(2);
+        GridWidget.Adder gridAdderSettings = gridWidgetSettings.createAdder(3);
         gridAdderSettings.getMainPositioner().alignVerticalCenter();
         
         gridAdderMain.add(this.buttonPreset);
         gridAdderMain.add(gridWidgetSettings);
         gridAdderMain.add(buttonReset);
         
-        this.addGridTextButtonPair(gridAdderSettings, TEXT_CHUNK, buttonChunk);
-        this.addGridTextButtonPair(gridAdderSettings, TEXT_BIOME, buttonBiome);
-        this.addGridTextButtonPair(gridAdderSettings, TEXT_CAVE_BIOME, buttonCaveBiome);
+        this.addGridTextButtonTriplet(gridAdderSettings, TEXT_CHUNK, buttonChunk, buttonChunkAdvanced);
+        this.addGridTextButtonTriplet(gridAdderSettings, TEXT_BIOME, buttonBiome, buttonBiomeAdvanced);
+        this.addGridTextButtonTriplet(gridAdderSettings, TEXT_CAVE_BIOME, buttonCaveBiome, buttonCaveBiomeAdvanced);
         
         gridWidgetMain.refreshPositions();
         SimplePositioningWidget.setPos(gridWidgetMain, 0, this.overlayTop + 8, this.width, this.height, 0.5f, 0.0f);

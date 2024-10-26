@@ -34,7 +34,7 @@ public enum IslandShape {
     }
     
     @FunctionalInterface
-    public static interface DistanceProvider {
+    public interface DistanceProvider {
         double apply(int noiseX, int noiseZ);
     }
 }

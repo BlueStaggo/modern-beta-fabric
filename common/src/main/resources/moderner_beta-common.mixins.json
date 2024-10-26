@@ -13,9 +13,11 @@
     "MixinStructure"
   ],
   "client": [
+    "client.AccessorTextWidget",
     "client.MixinBackgroundRenderer",
     "client.MixinBiomeColors",
     "client.MixinClientWorld",
+    "client.MixinCustomizeBuffetLevelScreen",
     "client.MixinDebugHud",
     "client.MixinLevelLoadingScreen",
     "client.MixinWorldCreator"

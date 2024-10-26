@@ -1,6 +1,7 @@
 package mod.bluestaggo.modernerbeta.settings;
 
 import com.google.gson.Gson;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import mod.bluestaggo.modernerbeta.ModernBetaBuiltInTypes;
 import mod.bluestaggo.modernerbeta.util.NbtCompoundBuilder;
 import mod.bluestaggo.modernerbeta.util.NbtReader;
@@ -34,12 +35,11 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
     public final Map<String, String> fractalEdgeVariants;
     public final Map<String, String> fractalMutatedVariants;
     public final Map<String, String> fractalVeryRareVariants;
-    public final Map<String, List<String>> fractalSubVariants;
+    public final Map<String, Map<String, List<String>>> fractalSubVariants;
     public final String fractalPlains;
     public final String fractalIcePlains;
     public final int fractalBiomeScale;
     public final int fractalHillScale;
-    public final int fractalSubVariantScale;
     public final int fractalSubVariantSeed;
     public final int fractalBeachShrink;
     public final int fractalOceanShrink;
@@ -84,7 +84,6 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
         this.fractalIcePlains = builder.fractalIcePlains;
         this.fractalBiomeScale = builder.fractalBiomeScale;
         this.fractalHillScale = builder.fractalHillScale;
-        this.fractalSubVariantScale = builder.fractalSubVariantScale;
         this.fractalSubVariantSeed = builder.fractalSubVariantSeed;
         this.fractalBeachShrink = builder.fractalBeachShrink;
         this.fractalOceanShrink = builder.fractalOceanShrink;
@@ -128,13 +127,12 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             .putCompound(NbtTags.FRACTAL_HILL_VARIANTS, FractalSettings.mapToNbt(this.fractalHillVariants))
             .putCompound(NbtTags.FRACTAL_EDGE_VARIANTS, FractalSettings.mapToNbt(this.fractalEdgeVariants))
             .putCompound(NbtTags.FRACTAL_VERY_RARE_VARIANTS, FractalSettings.mapToNbt(this.fractalVeryRareVariants))
-            .putCompound(NbtTags.FRACTAL_SUB_VARIANTS, FractalSettings.mapOfListToNbt(this.fractalSubVariants))
+            .putCompound(NbtTags.FRACTAL_SUB_VARIANTS, FractalSettings.subVariantsToNbt(this.fractalSubVariants))
             .putCompound(NbtTags.FRACTAL_MUTATED_VARIANTS, FractalSettings.mapToNbt(this.fractalMutatedVariants))
             .putString(NbtTags.FRACTAL_PLAINS, this.fractalPlains)
             .putString(NbtTags.FRACTAL_ICE_PLAINS, this.fractalIcePlains)
             .putInt(NbtTags.FRACTAL_BIOME_SCALE, this.fractalBiomeScale)
             .putInt(NbtTags.FRACTAL_HILL_SCALE, this.fractalHillScale)
-            .putInt(NbtTags.FRACTAL_SUB_VARIANT_SCALE, this.fractalSubVariantScale)
             .putInt(NbtTags.FRACTAL_SUB_VARIANT_SEED, this.fractalSubVariantSeed)
             .putInt(NbtTags.FRACTAL_BEACH_SHRINK, this.fractalBeachShrink)
             .putInt(NbtTags.FRACTAL_OCEAN_SHRINK, this.fractalOceanShrink)
@@ -172,7 +170,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
         public Map<String, String> fractalEdgeVariants;
         public Map<String, String> fractalMutatedVariants;
         public Map<String, String> fractalVeryRareVariants;
-        public Map<String, List<String>> fractalSubVariants;
+        public Map<String, Map<String, List<String>>> fractalSubVariants;
         public String fractalPlains;
         public String fractalIcePlains;
         public int fractalBiomeScale;
@@ -430,13 +428,12 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             this.fractalClimaticBiomes = ClimaticBiomeList.fromReader(NbtTags.FRACTAL_CLIMATIC_BIOMES, reader, this.fractalClimaticBiomes);
             this.fractalHillVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_HILL_VARIANTS, reader, this.fractalHillVariants);
             this.fractalVeryRareVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_VERY_RARE_VARIANTS, reader, this.fractalVeryRareVariants);
-            this.fractalSubVariants = FractalSettings.mapOfListFromReader(NbtTags.FRACTAL_SUB_VARIANTS, reader, this.fractalSubVariants);
+            this.fractalSubVariants = FractalSettings.subVariantsFromReader(NbtTags.FRACTAL_SUB_VARIANTS, reader, this.fractalSubVariants);
             this.fractalMutatedVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_MUTATED_VARIANTS, reader, this.fractalMutatedVariants);
             this.fractalPlains = reader.readString(NbtTags.FRACTAL_PLAINS, this.fractalPlains);
             this.fractalIcePlains = reader.readString(NbtTags.FRACTAL_ICE_PLAINS, this.fractalIcePlains);
             this.fractalBiomeScale = reader.readInt(NbtTags.FRACTAL_BIOME_SCALE, this.fractalBiomeScale);
             this.fractalHillScale = reader.readInt(NbtTags.FRACTAL_HILL_SCALE, this.fractalHillScale);
-            this.fractalSubVariantScale = reader.readInt(NbtTags.FRACTAL_SUB_VARIANT_SCALE, this.fractalSubVariantScale);
             this.fractalSubVariantSeed = reader.readInt(NbtTags.FRACTAL_SUB_VARIANT_SEED, this.fractalSubVariantSeed);
             this.fractalBeachShrink = reader.readInt(NbtTags.FRACTAL_BEACH_SHRINK, this.fractalBeachShrink);
             this.fractalOceanShrink = reader.readInt(NbtTags.FRACTAL_OCEAN_SHRINK, this.fractalOceanShrink);
@@ -462,7 +459,16 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             return new ModernBetaSettingsBiome(this);
         }
         
-        private void loadDatafix(NbtReader reader) {}
+        private void loadDatafix(NbtReader reader) {
+            String tag0 = "fractalSubVariantScale";
+            ModernBetaSettings.datafix(tag0, reader, () -> {
+                int scale = reader.readInt(tag0, 0);
+                Map<String, List<String>> baseSubVariants =
+                    FractalSettings.mapOfListFromReader(NbtTags.FRACTAL_SUB_VARIANTS, reader, Map.of());
+                this.fractalSubVariants = Map.of(String.valueOf(scale), baseSubVariants);
+                this.fractalSubVariantSeed -= scale;
+            });
+        }
         
         public static Map<String, ClimateMapping> createClimateMapping(
             ClimateMapping desert,

@@ -45,7 +45,6 @@ public record ModernBetaSettingsPreset(ModernBetaSettingsChunk settingsChunk, Mo
             ModernBetaRegistries.CHUNK.get(settingsChunk.chunkProvider);
             ModernBetaRegistries.BIOME.get(settingsBiome.biomeProvider);
             ModernBetaRegistries.CAVE_BIOME.get(settingsCaveBiome.biomeProvider);
-            
         } catch (Exception e) {
             ModernerBeta.log(Level.ERROR, "Unable to read settings JSON! Reverting to previous settings..");
             ModernerBeta.log(Level.ERROR, String.format("Reason: %s", e.getMessage()));
@@ -56,6 +55,44 @@ public record ModernBetaSettingsPreset(ModernBetaSettingsChunk settingsChunk, Mo
             settingsCaveBiome = this.settingsCaveBiome;
         }
         
+        return new Pair<>(new ModernBetaSettingsPreset(settingsChunk, settingsBiome, settingsCaveBiome), successful);
+    }
+
+    public Pair<ModernBetaSettingsPreset, Boolean> set(NbtCompound nbtChunk, NbtCompound nbtBiome, NbtCompound nbtCaveBiome) {
+        ModernBetaSettingsChunk settingsChunk;
+        ModernBetaSettingsBiome settingsBiome;
+        ModernBetaSettingsCaveBiome settingsCaveBiome;
+
+        boolean successful = true;
+
+        try {
+            // Attempt to read settings
+            settingsChunk = nbtChunk != null ?
+                ModernBetaSettingsChunk.fromCompound(nbtChunk) :
+                this.settingsChunk;
+
+            settingsBiome = nbtBiome != null ?
+                ModernBetaSettingsBiome.fromCompound(nbtBiome) :
+                this.settingsBiome;
+
+            settingsCaveBiome = nbtCaveBiome != null ?
+                ModernBetaSettingsCaveBiome.fromCompound(nbtCaveBiome) :
+                this.settingsCaveBiome;
+
+            // Test providers
+            ModernBetaRegistries.CHUNK.get(settingsChunk.chunkProvider);
+            ModernBetaRegistries.BIOME.get(settingsBiome.biomeProvider);
+            ModernBetaRegistries.CAVE_BIOME.get(settingsCaveBiome.biomeProvider);
+        } catch (Exception e) {
+            ModernerBeta.log(Level.ERROR, "Unable to read settings NBT! Reverting to previous settings..");
+            ModernerBeta.log(Level.ERROR, String.format("Reason: %s", e.getMessage()));
+            successful = false;
+
+            settingsChunk = this.settingsChunk;
+            settingsBiome = this.settingsBiome;
+            settingsCaveBiome = this.settingsCaveBiome;
+        }
+
         return new Pair<>(new ModernBetaSettingsPreset(settingsChunk, settingsBiome, settingsCaveBiome), successful);
     }
     

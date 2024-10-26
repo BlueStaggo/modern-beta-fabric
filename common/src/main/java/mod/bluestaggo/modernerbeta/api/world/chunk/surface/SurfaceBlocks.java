@@ -7,7 +7,7 @@ public record SurfaceBlocks(BlockState topBlock, BlockState fillerBlock) {
     public static final SurfaceBlocks GRASS = new SurfaceBlocks(BlockStates.GRASS_BLOCK, BlockStates.DIRT);
     public static final SurfaceBlocks SAND = new SurfaceBlocks(BlockStates.SAND, BlockStates.SAND);
     public static final SurfaceBlocks RED_SAND = new SurfaceBlocks(BlockStates.RED_SAND, BlockStates.RED_SAND);
-    public static final SurfaceBlocks BADLANDS = new SurfaceBlocks(BlockStates.RED_SAND, BlockStates.WHITE_TERRACOTTA);
+    public static final SurfaceBlocks BADLANDS = new SurfaceBlocks(BlockStates.RED_SAND, BlockStates.ORANGE_TERRACOTTA);
     public static final SurfaceBlocks STONE = new SurfaceBlocks(BlockStates.STONE, BlockStates.STONE);
     public static final SurfaceBlocks SNOW = new SurfaceBlocks(BlockStates.SNOW_BLOCK, BlockStates.SNOW_BLOCK);
     public static final SurfaceBlocks SNOW_DIRT = new SurfaceBlocks(BlockStates.SNOW_BLOCK, BlockStates.DIRT);

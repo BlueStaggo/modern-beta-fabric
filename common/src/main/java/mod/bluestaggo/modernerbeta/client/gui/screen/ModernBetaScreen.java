@@ -61,6 +61,12 @@ public abstract class ModernBetaScreen extends Screen {
         adder.add(new TextWidget(Text.translatable(text), this.textRenderer));
         adder.add(buttonWidget);
     }
+
+    protected void addGridTextButtonTriplet(GridWidget.Adder adder, String text, ButtonWidget buttonWidget, ButtonWidget buttonWidget2) {
+        adder.add(new TextWidget(Text.translatable(text), this.textRenderer));
+        adder.add(buttonWidget);
+        adder.add(buttonWidget2);
+    }
     
     protected void renderBackgroundOverlay(DrawContext context) {
         context.setShaderColor(0.125f, 0.125f, 0.125f, 1.0f);

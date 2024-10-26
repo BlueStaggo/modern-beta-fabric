@@ -2,6 +2,8 @@ package mod.bluestaggo.modernerbeta;
 
 import mod.bluestaggo.modernerbeta.tags.ModernBetaBiomeTags;
 
+import java.util.Set;
+
 public final class ModernBetaBuiltInTypes {
     public static final String DEFAULT_ID = "default";
     
@@ -19,7 +21,12 @@ public final class ModernBetaBuiltInTypes {
         EARLY_RELEASE("early_release"),
         MAJOR_RELEASE("major_release")
         ;
-        
+
+        public static final Set<String> CHUNK_PROVIDER_NOISE = Set.of(
+            BETA.id, SKYLANDS.id, ALPHA.id, INFDEV_611.id, INFDEV_420.id, INFDEV_415.id, PE.id, EARLY_RELEASE.id, MAJOR_RELEASE.id);
+        public static final Set<String> CHUNK_PROVIDER_FORCED_HEIGHT = Set.of(EARLY_RELEASE.id, MAJOR_RELEASE.id);
+        public static final Set<String> CHUNK_PROVIDER_FINITE = Set.of(INDEV.id, CLASSIC_0_30.id);
+
         public final String id;
         
         private Chunk(String id) {
@@ -34,7 +41,9 @@ public final class ModernBetaBuiltInTypes {
         VORONOI("voronoi"),
         FRACTAL("fractal")
         ;
-        
+
+        public static final Set<String> BIOME_PROVIDER_USES_NOISE = Set.of(BETA.id, PE.id, VORONOI.id);
+
         public final String id;
         
         private Biome(String id) { this.id = id; }
@@ -42,11 +51,10 @@ public final class ModernBetaBuiltInTypes {
     
     public enum CaveBiome {
         NONE("none"),
-        VORONOI("voronoi"),
-        BETA("beta"),
-        SINGLE("single")
+        SINGLE("single"),
+        VORONOI("voronoi")
         ;
-        
+
         public final String id;
         
         private CaveBiome(String id) {
@@ -200,7 +208,7 @@ public final class ModernBetaBuiltInTypes {
     public enum PresetCategory {
         BETA("beta"),
         ALPHA_INFDEV("alpha_infdev"),
-        LIMITED_SIZE("limited_size"),
+        FINITE("finite"),
         EARLY_RELEASE("early_release"),
         EARLY_RELEASE_LARGE_BIOMES("early_release_large_biomes"),
         MAJOR_RELEASE("major_release"),
