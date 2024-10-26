@@ -60,7 +60,7 @@ public record BiomePickerCallbacks(Consumer<Screen> screenChangeHandler, Screen 
     @Override
     public Optional<String> validate(String value) {
         return "".equals(value) || generatorOptionsHolder.getCombinedRegistryManager()
-            .get(RegistryKeys.BIOME).containsId(Identifier.tryParse(value))
+            .getOrThrow(RegistryKeys.BIOME).containsId(Identifier.tryParse(value))
             ? Optional.of(value) : Optional.empty();
     }
 
