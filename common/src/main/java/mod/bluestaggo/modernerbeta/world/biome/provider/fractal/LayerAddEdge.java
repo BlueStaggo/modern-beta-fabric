@@ -9,22 +9,21 @@ import net.minecraft.world.biome.BiomeKeys;
 import java.util.Map;
 
 public class LayerAddEdge extends Layer {
-	private final BiomeInfo beach, ocean, mushroomIsland;
+	private final BiomeInfo beach, stonyShore, ocean, mushroomIsland;
 	private final Map<BiomeInfo, BiomeInfo> edgeVariants;
 	private final RegistryEntryLookup<Biome> biomeLookup;
 
-	public LayerAddEdge(long seed, Layer parent, RegistryEntry<Biome> beach, RegistryEntry<Biome> ocean, RegistryEntry<Biome> mushroomIsland) {
-		this(seed, parent, beach, ocean, mushroomIsland, null, null);
-	}
-
 	public LayerAddEdge(long seed, Layer parent, Map<BiomeInfo, BiomeInfo> edgeVariants, RegistryEntryLookup<Biome> biomeLookup) {
-		this(seed, parent, null, null, null, edgeVariants, biomeLookup);
+		this(seed, parent, null, null, null, null, edgeVariants, biomeLookup);
 	}
 
-	public LayerAddEdge(long seed, Layer parent, RegistryEntry<Biome> beach, RegistryEntry<Biome> ocean, RegistryEntry<Biome> mushroomIsland,
+	public LayerAddEdge(long seed, Layer parent,
+						RegistryEntry<Biome> beach, RegistryEntry<Biome> stonyShore,
+						RegistryEntry<Biome> ocean, RegistryEntry<Biome> mushroomIsland,
 						Map<BiomeInfo, BiomeInfo> edgeVariants, RegistryEntryLookup<Biome> biomeLookup) {
 		super(seed, parent);
 		this.beach = BiomeInfo.of(beach);
+		this.stonyShore = BiomeInfo.of(stonyShore);
 		this.ocean = BiomeInfo.of(ocean);
 		this.mushroomIsland = BiomeInfo.of(mushroomIsland);
 		this.edgeVariants = edgeVariants;
@@ -52,6 +51,9 @@ public class LayerAddEdge extends Layer {
 					return edgeVariant;
 				}
 			} else if (beach != null && !b.biome().isIn(ModernBetaBiomeTags.FRACTAL_NO_BEACHES) && neighborsContain(n, ocean)) {
+				if (b.biome().isIn(ModernBetaBiomeTags.FRACTAL_HAS_STONY_SHORE)) {
+					return stonyShore != null ? stonyShore : b;
+				}
 				return beach;
 			}
 			return b;

@@ -534,13 +534,15 @@ public class ModernBetaBiomeFeatures {
         if (useBetaCarvers) {
             builder.carver(GenerationStep.Carver.AIR, ModernBetaConfiguredCarvers.BETA_CAVE);
             builder.carver(GenerationStep.Carver.AIR, ModernBetaConfiguredCarvers.BETA_CAVE_DEEP);
+            if (addCanyons) {
+                builder.carver(GenerationStep.Carver.AIR, ModernBetaConfiguredCarvers.BETA_CANYON);
+            }
         } else {
             builder.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.CAVE);
             builder.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.CAVE_EXTRA_UNDERGROUND);
-        }
-
-        if (addCanyons) {
-            builder.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.CANYON);
+            if (addCanyons) {
+                builder.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.CANYON);
+            }
         }
     }
     

@@ -103,6 +103,7 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                 this.booleanOption(NbtTags.FRACTAL_OCEANS),
                 this.booleanOption(NbtTags.FRACTAL_ADD_RIVERS),
                 this.booleanOption(NbtTags.FRACTAL_ADD_BEACHES),
+                this.booleanOption(NbtTags.FRACTAL_ADD_STONY_SHORES),
                 this.booleanOption(NbtTags.FRACTAL_ADD_MUSHROOM_ISLANDS),
                 this.booleanOption(NbtTags.FRACTAL_ADD_SWAMP_RIVERS),
                 this.booleanOption(NbtTags.FRACTAL_ADD_DEEP_OCEANS),

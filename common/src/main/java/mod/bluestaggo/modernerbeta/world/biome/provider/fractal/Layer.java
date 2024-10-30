@@ -30,6 +30,7 @@ public abstract class Layer {
 		RegistryEntry<Biome> frozenRiver = biomeLookup.getOrThrow(BiomeKeys.FROZEN_RIVER);
 		RegistryEntry<Biome> mushroomIsland = biomeLookup.getOrThrow(BiomeKeys.MUSHROOM_FIELDS);
 		RegistryEntry<Biome> beach = biomeLookup.getOrThrow(BiomeKeys.BEACH);
+		RegistryEntry<Biome> stonyShore = settings.addStonyShores ? biomeLookup.getOrThrow(BiomeKeys.STONY_SHORE) : null;
 
 		Map<BiomeInfo, BiomeInfo> replacementBiomes = Map.ofEntries(
 			Map.entry(DummyBiome.OCEAN.biomeInfo, BiomeInfo.of(ocean)),
@@ -122,7 +123,7 @@ public abstract class Layer {
 			}
 
 			if (settings.beachShrink == i - 2 - settings.hillScale && settings.addBeaches) {
-				biomes = new LayerAddEdge(1000, biomes, beach, ocean, mushroomIsland,
+				biomes = new LayerAddEdge(1000, biomes, beach, stonyShore, ocean, mushroomIsland,
 					settings.useClimaticBiomes ? null : settings.edgeVariants, settings.useClimaticBiomes ? null : biomeLookup);
 			}
 
@@ -144,7 +145,7 @@ public abstract class Layer {
 		if (!settings.veryRareVariants.isEmpty()) biomes = new LayerAddRareBiomes(1001, biomes, settings.veryRareVariants);
 
 		if (settings.beachShrink == -1 && settings.addBeaches) {
-			biomes = new LayerAddEdge(1000, biomes, beach, ocean, mushroomIsland,
+			biomes = new LayerAddEdge(1000, biomes, beach, stonyShore, ocean, mushroomIsland,
 				settings.useClimaticBiomes ? null : settings.edgeVariants, settings.useClimaticBiomes ? null : biomeLookup);
 		}
 
@@ -158,7 +159,7 @@ public abstract class Layer {
 			}
 
 			if (i == settings.beachShrink && settings.addBeaches) {
-				biomes = new LayerAddEdge(1000, biomes, beach, ocean, mushroomIsland,
+				biomes = new LayerAddEdge(1000, biomes, beach, stonyShore, ocean, mushroomIsland,
 					settings.useClimaticBiomes ? null : settings.edgeVariants, settings.useClimaticBiomes ? null : biomeLookup);
 			}
 			if (i == 1 && settings.addSwampRivers) biomes = new LayerAddSwampRivers(1000, biomes, river);

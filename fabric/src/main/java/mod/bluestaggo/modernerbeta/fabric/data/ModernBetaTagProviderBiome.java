@@ -503,7 +503,11 @@ public class ModernBetaTagProviderBiome extends FabricTagProvider<Biome> {
                 ModernBetaBiomes.LATE_BETA_SWAMPLAND,
                 ModernBetaBiomes.EARLY_RELEASE_SWAMPLAND,
                 BiomeKeys.SWAMP,
-                BiomeKeys.MANGROVE_SWAMP,
+                BiomeKeys.MANGROVE_SWAMP
+            );
+
+        getOrCreateTagBuilder(FRACTAL_HAS_STONY_SHORE)
+            .add(
                 ModernBetaBiomes.LATE_BETA_EXTREME_HILLS,
                 ModernBetaBiomes.EARLY_RELEASE_EXTREME_HILLS,
                 BiomeKeys.WINDSWEPT_HILLS,
