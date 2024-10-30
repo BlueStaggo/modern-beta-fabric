@@ -532,13 +532,15 @@ public class ModernBetaBiomeFeatures {
         if (useBetaCarvers) {
             builder.carver(ModernBetaConfiguredCarvers.BETA_CAVE);
             builder.carver(ModernBetaConfiguredCarvers.BETA_CAVE_DEEP);
+            if (addCanyons) {
+                builder.carver(ModernBetaConfiguredCarvers.BETA_CANYON);
+            }
         } else {
             builder.carver(ConfiguredCarvers.CAVE);
             builder.carver(ConfiguredCarvers.CAVE_EXTRA_UNDERGROUND);
-        }
-
-        if (addCanyons) {
-            builder.carver(ConfiguredCarvers.CANYON);
+            if (addCanyons) {
+                builder.carver(ConfiguredCarvers.CANYON);
+            }
         }
     }
     

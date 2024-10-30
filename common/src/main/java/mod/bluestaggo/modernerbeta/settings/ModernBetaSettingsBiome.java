@@ -49,6 +49,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
     public final boolean fractalAddSnow;
     public final boolean fractalAddMushroomIslands;
     public final boolean fractalAddBeaches;
+    public final boolean fractalAddStonyShores;
     public final boolean fractalAddHills;
     public final boolean fractalAddSwampRivers;
     public final boolean fractalAddDeepOceans;
@@ -93,6 +94,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
         this.fractalAddSnow = builder.fractalAddSnow;
         this.fractalAddMushroomIslands = builder.fractalAddMushroomIslands;
         this.fractalAddBeaches = builder.fractalAddBeaches;
+        this.fractalAddStonyShores = builder.fractalAddStonyShores;
         this.fractalAddHills = builder.fractalAddHills;
         this.fractalAddSwampRivers = builder.fractalAddSwampRivers;
         this.fractalAddDeepOceans = builder.fractalAddDeepOceans;
@@ -142,6 +144,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             .putBoolean(NbtTags.FRACTAL_ADD_SNOW, this.fractalAddSnow)
             .putBoolean(NbtTags.FRACTAL_ADD_MUSHROOM_ISLANDS, this.fractalAddMushroomIslands)
             .putBoolean(NbtTags.FRACTAL_ADD_BEACHES, this.fractalAddBeaches)
+            .putBoolean(NbtTags.FRACTAL_ADD_STONY_SHORES, this.fractalAddStonyShores)
             .putBoolean(NbtTags.FRACTAL_ADD_HILLS, this.fractalAddHills)
             .putBoolean(NbtTags.FRACTAL_ADD_SWAMP_RIVERS, this.fractalAddSwampRivers)
             .putBoolean(NbtTags.FRACTAL_ADD_DEEP_OCEANS, this.fractalAddDeepOceans)
@@ -185,6 +188,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
         public boolean fractalAddSnow;
         public boolean fractalAddMushroomIslands;
         public boolean fractalAddBeaches;
+        public boolean fractalAddStonyShores;
         public boolean fractalAddHills;
         public boolean fractalAddSwampRivers;
         public boolean fractalAddDeepOceans;
@@ -400,6 +404,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             this.fractalAddRivers = true;
             this.fractalAddSnow = false;
             this.fractalAddBeaches = false;
+            this.fractalAddStonyShores = false;
             this.fractalAddMushroomIslands = false;
             this.fractalAddHills = false;
             this.fractalAddSwampRivers = false;
@@ -443,6 +448,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             this.fractalAddSnow = reader.readBoolean(NbtTags.FRACTAL_ADD_SNOW, this.fractalAddSnow);
             this.fractalAddMushroomIslands = reader.readBoolean(NbtTags.FRACTAL_ADD_MUSHROOM_ISLANDS, this.fractalAddMushroomIslands);
             this.fractalAddBeaches = reader.readBoolean(NbtTags.FRACTAL_ADD_BEACHES, this.fractalAddBeaches);
+            this.fractalAddStonyShores = reader.readBoolean(NbtTags.FRACTAL_ADD_STONY_SHORES, this.fractalAddStonyShores);
             this.fractalAddHills = reader.readBoolean(NbtTags.FRACTAL_ADD_HILLS, this.fractalAddHills);
             this.fractalAddSwampRivers = reader.readBoolean(NbtTags.FRACTAL_ADD_SWAMP_RIVERS, this.fractalAddSwampRivers);
             this.fractalAddDeepOceans = reader.readBoolean(NbtTags.FRACTAL_ADD_DEEP_OCEANS, this.fractalAddDeepOceans);

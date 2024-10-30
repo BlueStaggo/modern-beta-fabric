@@ -1738,6 +1738,7 @@ public class ModernBetaSettingsPresets {
         settingsBiome.fractalAddSnow = true;
         settingsBiome.fractalAddMushroomIslands = true;
         settingsBiome.fractalAddBeaches = true;
+        settingsBiome.fractalAddStonyShores = true;
         settingsBiome.fractalAddHills = true;
         settingsBiome.fractalAddDeepOceans = true;
         settingsBiome.fractalAddMutations = true;
@@ -1860,6 +1861,7 @@ public class ModernBetaSettingsPresets {
         settingsBiome.fractalAddSnow = true;
         settingsBiome.fractalAddMushroomIslands = true;
         settingsBiome.fractalAddBeaches = true;
+        settingsBiome.fractalAddStonyShores = true;
         settingsBiome.fractalAddHills = true;
         settingsBiome.fractalAddDeepOceans = true;
         settingsBiome.fractalAddMutations = true;

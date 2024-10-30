@@ -121,6 +121,7 @@ public class ModernBetaGraphicalChunkSettingsScreen extends ModernBetaGraphicalC
                 this.booleanOption(NbtTags.USE_CAVES),
                 this.booleanOption(NbtTags.USE_FIXED_CAVES),
                 this.booleanOption(NbtTags.FORCE_BETA_CAVES),
+                this.booleanOption(NbtTags.FORCE_BETA_RAVINES),
             }
         );
 

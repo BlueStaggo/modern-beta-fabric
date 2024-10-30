@@ -15,6 +15,7 @@ import mod.bluestaggo.modernerbeta.world.carver.BetaCaveCarverConfig;
 import mod.bluestaggo.modernerbeta.world.carver.configured.ModernBetaConfiguredCarvers;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -133,6 +134,8 @@ public class ModernBetaChunkGenerator extends NoiseChunkGenerator {
     public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk) {
         if (this.chunkProvider.skipChunk(chunk.getPos().x, chunk.getPos().z, ModernBetaGenerationStep.CARVERS)) return;
 
+        ModernBetaSettingsChunk chunkSettings = this.chunkProvider.getChunkSettings();
+
         BiomeAccess biomeAccessWithSource = biomeAccess.withSource((biomeX, biomeY, biomeZ) -> this.biomeSource.getBiome(biomeX, biomeY, biomeZ, noiseConfig.getMultiNoiseSampler()));
         ChunkPos chunkPos = chunk.getPos();
 
@@ -143,7 +146,8 @@ public class ModernBetaChunkGenerator extends NoiseChunkGenerator {
         
         // Chunk Noise Sampler used to sample surface level
         ChunkNoiseSampler chunkNoiseSampler = chunk.getOrCreateChunkNoiseSampler(c -> this.createChunkNoiseSampler(c, structureAccessor, Blender.getBlender(chunkRegion), noiseConfig));
-        
+
+        Registry<ConfiguredCarver<?>> configuredCarverRegistry = chunkRegion.getRegistryManager().getOrThrow(RegistryKeys.CONFIGURED_CARVER);
         CarverContext carverContext = new CarverContext(this, chunkRegion.getRegistryManager(), chunk.getHeightLimitView(), chunkNoiseSampler, noiseConfig, this.settings.value().surfaceRule());
         CarvingMask carvingMask = ((ProtoChunk)chunk).getOrCreateCarvingMask();
         
@@ -166,14 +170,19 @@ public class ModernBetaChunkGenerator extends NoiseChunkGenerator {
                     ConfiguredCarver<?> configuredCarver = carverEntry.value();
                     random.setSeed((long) chunkX * l + (long) chunkZ * l1 ^ seed);
 
-                    if (this.chunkProvider.getChunkSettings().forceBetaCaves) {
+                    if (chunkSettings.forceBetaCaves || chunkSettings.forceBetaRavines) {
                         RegistryKey<ConfiguredCarver<?>> carverKey = carverEntry.getKey().orElse(null);
                         if (carverKey != null) {
                             ConfiguredCarver<?> replacementCarver = null;
-                            if (carverKey.equals(ConfiguredCarvers.CAVE)) {
-                                replacementCarver = chunkRegion.getRegistryManager().getOrThrow(RegistryKeys.CONFIGURED_CARVER).get(ModernBetaConfiguredCarvers.BETA_CAVE);
-                            } else if (carverKey.equals(ConfiguredCarvers.CAVE_EXTRA_UNDERGROUND)) {
-                                replacementCarver = chunkRegion.getRegistryManager().getOrThrow(RegistryKeys.CONFIGURED_CARVER).get(ModernBetaConfiguredCarvers.BETA_CAVE_DEEP);
+                            if (chunkSettings.forceBetaCaves) {
+                                if (carverKey.equals(ConfiguredCarvers.CAVE)) {
+                                    replacementCarver = configuredCarverRegistry.get(ModernBetaConfiguredCarvers.BETA_CAVE);
+                                } else if (carverKey.equals(ConfiguredCarvers.CAVE_EXTRA_UNDERGROUND)) {
+                                    replacementCarver = configuredCarverRegistry.get(ModernBetaConfiguredCarvers.BETA_CAVE_DEEP);
+                                }
+                            }
+                            if (chunkSettings.forceBetaRavines && carverKey.equals(ConfiguredCarvers.CANYON)) {
+                                replacementCarver = configuredCarverRegistry.get(ModernBetaConfiguredCarvers.BETA_CANYON);
                             }
 
                             if (replacementCarver != null) {

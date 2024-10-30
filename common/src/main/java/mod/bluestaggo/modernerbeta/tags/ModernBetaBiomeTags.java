@@ -83,7 +83,7 @@ public class ModernBetaBiomeTags {
     public static final TagKey<Biome> FRACTAL_SWAMP_RIVERS = keyOf("fractal_swamp_rivers");
     public static final TagKey<Biome> FRACTAL_JUNGLE_RIVERS = keyOf("fractal_jungle_rivers");
     public static final TagKey<Biome> FRACTAL_NO_BEACHES = keyOf("fractal_no_beaches");
-
+    public static final TagKey<Biome> FRACTAL_HAS_STONY_SHORE = keyOf("fractal_has_stony_shore");
 
     private static TagKey<Biome> keyOf(String id) {
         return TagKey.of(RegistryKeys.BIOME, ModernerBeta.createId(id));
