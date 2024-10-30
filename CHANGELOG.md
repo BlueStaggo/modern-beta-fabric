@@ -1,2 +1,5 @@
+## Changes
+- Increased scale of landmasses in the Release Hybrid preset.
+
 ## Fixes
-- Grass and leaves should no longer appear transparent under certain conditions.
+- Raised lava level in beta caves by one block.
