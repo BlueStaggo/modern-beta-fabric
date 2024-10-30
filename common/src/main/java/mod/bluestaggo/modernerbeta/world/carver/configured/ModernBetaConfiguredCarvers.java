@@ -37,7 +37,7 @@ public class ModernBetaConfiguredCarvers {
             0.0f,                                                                               // Probability, unused here
             BiasedToBottomHeightProvider.create(YOffset.fixed(0), YOffset.fixed(127), 8),       // Y Level
             ConstantFloatProvider.create(0.5f),                                                 // Y scale, for large cave case(?)
-            YOffset.aboveBottom(10),                                                            // Lava Level
+            YOffset.aboveBottom(11),                                                            // Lava Level
             CarverDebugConfig.create(false, Blocks.WARPED_BUTTON.getDefaultState()),
             registryBlock.getOrThrow(ModernBetaBlockTags.OVERWORLD_CARVER_REPLACEABLES),
             ConstantFloatProvider.create(1.0f),                                                 // Tunnel horizontal scale
@@ -51,7 +51,7 @@ public class ModernBetaConfiguredCarvers {
             0.15f,                                                                              // Probability, unused here
             UniformHeightProvider.create(YOffset.aboveBottom(0), YOffset.fixed(0)),             // Y Level
             UniformFloatProvider.create(0.1f, 0.9f),                                            // Y scale, for large cave case(?)
-            YOffset.aboveBottom(10),                                                            // Lava Level
+            YOffset.aboveBottom(11),                                                            // Lava Level
             CarverDebugConfig.create(false, Blocks.CRIMSON_BUTTON.getDefaultState()),
             registryBlock.getOrThrow(ModernBetaBlockTags.OVERWORLD_CARVER_REPLACEABLES),
             UniformFloatProvider.create(0.7f, 1.4f),                                            // Tunnel horizontal scale

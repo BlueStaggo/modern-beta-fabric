@@ -2017,7 +2017,6 @@ public class ModernBetaSettingsPresets {
         settingsBiome.fractalPlains = "minecraft:plains";
         settingsBiome.fractalIcePlains = "minecraft:snowy_plains";
         settingsBiome.fractalTerrainType = FractalSettings.TerrainType.EARLY_RELEASE.id;
-        settingsBiome.fractalOceanShrink = 1;
         settingsBiome.fractalAddSnow = true;
         settingsBiome.fractalAddMushroomIslands = true;
         settingsBiome.fractalAddBeaches = true;
