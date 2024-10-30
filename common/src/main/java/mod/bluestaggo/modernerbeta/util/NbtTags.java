@@ -20,6 +20,7 @@ public class NbtTags {
     public static final String USE_CAVES = "useCaves";
     public static final String USE_FIXED_CAVES = "useFixedCaves";
     public static final String FORCE_BETA_CAVES = "forceBetaCaves";
+    public static final String FORCE_BETA_RAVINES = "forceBetaRavines";
 
     // Noise
     public static final String NOISE_POST_PROCESSOR = "noisePostProcessor";
@@ -142,6 +143,7 @@ public class NbtTags {
     public static final String FRACTAL_ADD_SNOW = "fractalAddSnow";
     public static final String FRACTAL_ADD_MUSHROOM_ISLANDS = "fractalAddMushroomIslands";
     public static final String FRACTAL_ADD_BEACHES = "fractalAddBeaches";
+    public static final String FRACTAL_ADD_STONY_SHORES = "fractalAddStonyShores";
     public static final String FRACTAL_ADD_HILLS = "fractalAddHills";
     public static final String FRACTAL_ADD_SWAMP_RIVERS = "fractalAddSwampRivers";
     public static final String FRACTAL_ADD_DEEP_OCEANS = "fractalAddDeepOceans";

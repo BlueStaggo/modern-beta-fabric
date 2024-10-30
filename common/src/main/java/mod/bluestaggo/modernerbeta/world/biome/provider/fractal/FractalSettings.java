@@ -36,7 +36,8 @@ public class FractalSettings {
     public final boolean addRivers;
     public final boolean addSnow;
     public final boolean addMushroomIslands;
-    public final boolean addBeaches;
+	public final boolean addBeaches;
+	public final boolean addStonyShores;
     public final boolean addHills;
     public final boolean addSwampRivers;
     public final boolean addDeepOceans;
@@ -65,6 +66,7 @@ public class FractalSettings {
 		this.addSnow = builder.addSnow;
 		this.addMushroomIslands = builder.addMushroomIslands;
 		this.addBeaches = builder.addBeaches;
+		this.addStonyShores = builder.addStonyShores;
 		this.addHills = builder.addHills;
 		this.addSwampRivers = builder.addSwampRivers;
 		this.addDeepOceans = builder.addDeepOceans;
@@ -170,7 +172,8 @@ public class FractalSettings {
 	    public boolean addRivers;
 	    public boolean addSnow;
 	    public boolean addMushroomIslands;
-	    public boolean addBeaches;
+		public boolean addBeaches;
+		public boolean addStonyShores;
 	    public boolean addHills;
 	    public boolean addSwampRivers;
 	    public boolean addDeepOceans;
@@ -198,6 +201,7 @@ public class FractalSettings {
 			this.addSnow = false;
 			this.addMushroomIslands = false;
 			this.addBeaches = false;
+			this.addStonyShores = false;
 			this.addHills = false;
 			this.addSwampRivers = false;
 			this.addDeepOceans = false;

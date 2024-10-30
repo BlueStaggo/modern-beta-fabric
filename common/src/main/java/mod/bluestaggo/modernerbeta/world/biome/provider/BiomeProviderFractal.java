@@ -104,6 +104,7 @@ public class BiomeProviderFractal extends BiomeProvider implements BiomeResolver
 		fractalSettings.addSnow = this.settings.fractalAddSnow;
 		fractalSettings.addMushroomIslands = this.settings.fractalAddMushroomIslands;
 		fractalSettings.addBeaches = this.settings.fractalAddBeaches;
+		fractalSettings.addStonyShores = this.settings.fractalAddStonyShores;
 		fractalSettings.addHills = this.settings.fractalAddHills;
 		fractalSettings.addSwampRivers = this.settings.fractalAddSwampRivers;
 		fractalSettings.addDeepOceans = this.settings.fractalAddDeepOceans;
