@@ -335,7 +335,7 @@ public class BetaCaveCarver extends Carver<BetaCaveCarverConfig> {
             maxZ = 16;
         }
 
-        if (this.isRegionUncarvable(context, config, chunk, mainChunkX, mainChunkZ, minX, maxX, minY, maxY, minZ, maxZ)) { 
+        if (this.isRegionUncarvable(context, config, chunk, mainChunkX, mainChunkZ, minX, maxX, minY, maxY, minZ, maxZ)) {
             return false;
         }
 
@@ -391,7 +391,7 @@ public class BetaCaveCarver extends Carver<BetaCaveCarverConfig> {
     }
     
     private BlockState getBlockState(CarverContext context, BetaCaveCarverConfig config, BlockPos pos, AquiferSampler aquiferSampler) {
-        if (pos.getY() < config.lavaLevel.getY(context)) {
+        if (pos.getY() <= config.lavaLevel.getY(context)) {
             return BlockStates.LAVA;
         }
         
@@ -472,7 +472,7 @@ public class BetaCaveCarver extends Carver<BetaCaveCarverConfig> {
                     }
                     
                     // Don't carve into lava aquifers that spawn above lava level, unless useAquifers enabled
-                    if (!useAquifers && block == Blocks.LAVA && relY >= lavaLevel) {
+                    if (!useAquifers && block == Blocks.LAVA && relY > lavaLevel) {
                         return true;
                     }
 
