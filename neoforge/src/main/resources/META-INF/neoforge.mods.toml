@@ -19,13 +19,13 @@ logoFile = "assets/moderner_beta/banner.png"
 
 [[dependencies.moderner_beta]]
 modId = "neoforge"
-versionRange = "[21.2-beta,)"
+versionRange = "[21.4-beta,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.moderner_beta]]
 modId = "minecraft"
-versionRange = "[1.21.2,)"
+versionRange = "[1.21.4,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -37,6 +37,6 @@ side = "BOTH"
 
 [[dependencies.moderner_beta]]
 modId = "architectury"
-versionRange = "[14,)"
+versionRange = "[15,)"
 ordering = "NONE"
 side = "BOTH"
