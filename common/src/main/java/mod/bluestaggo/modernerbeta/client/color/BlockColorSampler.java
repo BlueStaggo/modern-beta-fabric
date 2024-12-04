@@ -81,7 +81,7 @@ public final class BlockColorSampler {
     
     public int getFoliageColor(BlockState state, BlockRenderView view, BlockPos pos, int tintNdx) {
         if (view == null || pos == null) { // Appears to enter here when loading color for inventory block
-            return FoliageColors.getDefaultColor();
+            return 0xFF48B518;
         }
         
         if (this.useBiomeColor()) {

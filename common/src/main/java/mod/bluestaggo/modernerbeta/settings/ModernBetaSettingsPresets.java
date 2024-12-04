@@ -1193,19 +1193,19 @@ public class ModernBetaSettingsPresets {
                    0.7, 0.3, 0.8
                ),
                new VoronoiPointBiome(
-                   BiomeKeys.DARK_FOREST.getValue().toString(),
+                   BiomeKeys.PALE_GARDEN.getValue().toString(),
                    BiomeKeys.OCEAN.getValue().toString(),
                    BiomeKeys.DEEP_OCEAN.getValue().toString(),
                    0.7, 0.5, 0.8
                ),
                new VoronoiPointBiome(
-                   BiomeKeys.DARK_FOREST.getValue().toString(),
+                   BiomeKeys.PALE_GARDEN.getValue().toString(),
                    BiomeKeys.OCEAN.getValue().toString(),
                    BiomeKeys.DEEP_OCEAN.getValue().toString(),
                    0.7, 0.7, 0.8
                ),
                new VoronoiPointBiome(
-                   BiomeKeys.DARK_FOREST.getValue().toString(),
+                   BiomeKeys.PALE_GARDEN.getValue().toString(),
                    BiomeKeys.OCEAN.getValue().toString(),
                    BiomeKeys.DEEP_OCEAN.getValue().toString(),
                    0.7, 0.9, 0.8
@@ -1887,6 +1887,7 @@ public class ModernBetaSettingsPresets {
             Map.entry("*minecraft:forest", "0.3;0.7"),
             Map.entry("*minecraft:taiga", "0.3;0.8"),
             Map.entry("*minecraft:dark_forest", "0.3;0.7"),
+            Map.entry("*minecraft:pale_garden", "0.3;0.7"),
             Map.entry("*minecraft:birch_forest", "0.3;0.7"),
             Map.entry("*minecraft:old_growth_birch_forest", "0.3;0.7"),
             Map.entry("*minecraft:flower_forest", "0.3;0.7"),
@@ -2000,6 +2001,13 @@ public class ModernBetaSettingsPresets {
                     "minecraft:old_growth_birch_forest",
                     "minecraft:birch_forest",
                     "minecraft:birch_forest"
+                )),
+                Map.entry("minecraft:dark_forest", List.of(
+                    "minecraft:pale_garden",
+                    "minecraft:dark_forest",
+                    "minecraft:dark_forest",
+                    "minecraft:dark_forest",
+                    "minecraft:dark_forest"
                 ))
             ))
         );
@@ -2012,6 +2020,7 @@ public class ModernBetaSettingsPresets {
             Map.entry("minecraft:birch_forest", "minecraft:old_growth_birch_forest"),
             Map.entry("*minecraft:birch_forest", "*minecraft:old_growth_birch_forest"),
             Map.entry("minecraft:dark_forest", "*minecraft:dark_forest"),
+            Map.entry("minecraft:pale_garden", "*minecraft:pale_garden"),
             Map.entry("minecraft:old_growth_pine_taiga", "minecraft:old_growth_spruce_taiga"),
             Map.entry("minecraft:windswept_hills", "minecraft:windswept_gravelly_hills"),
             Map.entry("minecraft:windswept_forest", "minecraft:windswept_gravelly_hills")
