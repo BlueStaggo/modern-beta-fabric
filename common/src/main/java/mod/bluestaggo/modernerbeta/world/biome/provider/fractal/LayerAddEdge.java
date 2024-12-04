@@ -22,8 +22,8 @@ public class LayerAddEdge extends Layer {
 						RegistryEntry<Biome> ocean, RegistryEntry<Biome> mushroomIsland,
 						Map<BiomeInfo, BiomeInfo> edgeVariants, RegistryEntryLookup<Biome> biomeLookup) {
 		super(seed, parent);
-		this.beach = BiomeInfo.of(beach);
-		this.stonyShore = BiomeInfo.of(stonyShore);
+		this.beach = beach != null ? BiomeInfo.of(beach) : null;
+		this.stonyShore = stonyShore != null ? BiomeInfo.of(stonyShore) : null;
 		this.ocean = BiomeInfo.of(ocean);
 		this.mushroomIsland = BiomeInfo.of(mushroomIsland);
 		this.edgeVariants = edgeVariants;
