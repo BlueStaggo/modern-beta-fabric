@@ -1,3 +1,8 @@
+# 2.1.2
+
+## Fixes
+- Fixed a crash involving certain fractal biome generator configurations.
+
 # 2.1.1
 
 ## Fixes
