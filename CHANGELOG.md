@@ -1,2 +1,2 @@
 ## Fixes
-- Fixed an off-by-one error with underground lava generation
+- Fixed a crash involving certain fractal biome generator configurations.
