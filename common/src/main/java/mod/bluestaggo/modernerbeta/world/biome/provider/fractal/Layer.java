@@ -104,7 +104,7 @@ public abstract class Layer {
 			if (settings.addDeepOceans) land = new LayerDeepenOcean(4, land);
 		}
 
-		Layer riverLayout = new LayerInitRiver(100, land);
+		Layer riverLayout = new LayerInitRiver(100, land, settings.terrainType == FractalSettings.TerrainType.MAJOR_RELEASE);
 		Layer mutationLayout = new LayerInitMutation(100, land);
 		mutationLayout = LayerZoom.multi(1000, mutationLayout, settings.hillScale);
 		if (settings.terrainType == FractalSettings.TerrainType.MAJOR_RELEASE) {
