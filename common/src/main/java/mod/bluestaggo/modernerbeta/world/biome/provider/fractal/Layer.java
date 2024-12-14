@@ -197,7 +197,6 @@ public abstract class Layer {
 	private static Layer maybeAddClimateEdge(Layer layer, FractalSettings settings, int oceanShrink) {
 		if (settings.oceanShrink != oceanShrink) return layer;
 		if (settings.useClimaticBiomes) {
-			layer = new LayerAddClimate(2, layer);
 			layer = new LayerCoolWarmEdge(2, layer);
 			layer = new LayerHeatIceEdge(2, layer);
 			layer = new LayerRareClimate(3, layer);
