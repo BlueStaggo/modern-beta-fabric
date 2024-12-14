@@ -5,6 +5,7 @@ on:
     tags-ignore:
       - '**'
   pull-request:
+    types: [opened, reopened]
 
 jobs:
   build:
