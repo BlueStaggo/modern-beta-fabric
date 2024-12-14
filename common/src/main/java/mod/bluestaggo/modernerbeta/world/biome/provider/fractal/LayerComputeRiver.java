@@ -21,7 +21,6 @@ public class LayerComputeRiver extends Layer {
 		int matchType = match.type();
 		if (matchType >= 2) matchType = matchType % 2 + 2;
 
-		if (match.type() < 2) return false;
 		for (BiomeInfo neighbor : neighbors) {
 			int nType = neighbor.type();
 			if (nType >= 2) nType = nType % 2 + 2;

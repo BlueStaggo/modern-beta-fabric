@@ -53,7 +53,6 @@ public abstract class ChunkProvider {
     
     protected final ChunkRandom.RandomProvider randomProvider;
     protected final RandomSplitter randomSplitter;
-    protected final BlockSourceDeepslate blockSourceDeepslate;
     
     protected final List<BlockSource> blockSources;
     protected final SurfaceBuilder surfaceBuilder;
@@ -74,7 +73,6 @@ public abstract class ChunkProvider {
         this.defaultFluidLevelSampler = (x, y, z) -> new FluidLevel(this.getSeaLevel(), BlockStates.AIR);
         this.randomProvider = chunkGenerator.getGeneratorSettings().value().getRandomProvider();
         this.randomSplitter = this.randomProvider.create(this.seed).nextSplitter();
-        this.blockSourceDeepslate = new BlockSourceDeepslate(this.chunkSettings, this.randomSplitter);
         
         this.blockSources = ModernBetaRegistries.BLOCKSOURCE
             .getEntries()

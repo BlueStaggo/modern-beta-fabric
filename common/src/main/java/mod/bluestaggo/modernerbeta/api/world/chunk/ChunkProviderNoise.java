@@ -406,7 +406,7 @@ public abstract class ChunkProviderNoise extends ChunkProvider {
         
         // Create and populate block sources
         BlockSourceRules.Builder builder = new BlockSourceRules.Builder().add(baseBlockSource);
-        this.blockSources.forEach(blockSource -> builder.add(blockSource));
+        this.blockSources.forEach(builder::add);
         
         BlockSourceRules blockSources = builder.build(this.defaultBlock);
         

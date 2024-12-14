@@ -192,7 +192,7 @@ public class ChunkProviderInfdev227 extends ChunkProvider implements ChunkProvid
         Block defaultFluid = this.defaultFluid.getBlock();
         
         BlockSourceRules.Builder builder = new BlockSourceRules.Builder().add(this.getBaseBlockSource(structureWeightSampler, noisePos, blockHolder, defaultBlock, defaultFluid));
-        this.blockSources.forEach(blockSource -> builder.add(blockSource));
+        this.blockSources.forEach(builder::add);
         builder.add(this.getActualBlockSource(blockHolder));
         
         BlockSourceRules blockSources = builder.build(this.defaultBlock);
