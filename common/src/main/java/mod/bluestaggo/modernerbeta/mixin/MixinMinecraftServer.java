@@ -29,7 +29,7 @@ public abstract class MixinMinecraftServer {
         ChunkGenerator chunkGenerator = world.getChunkManager().getChunkGenerator();
 
         // Set old spawn angle (doesn't seem to work?)
-        if (chunkGenerator instanceof ModernBetaChunkGenerator modernBetaChunkGenerator) {
+        if (chunkGenerator instanceof ModernBetaChunkGenerator) {
             worldProperties.setSpawnAngle(-90.0f);
         }
     }
@@ -67,7 +67,7 @@ public abstract class MixinMinecraftServer {
                 setIndevProperties(world, chunkProviderIndev.getLevelTheme());
             }
             
-            if (chunkProvider instanceof ChunkProviderFinite chunkProviderFinite) {
+            if (chunkProvider instanceof ChunkProviderFinite) {
                 ChunkProviderFinite.resetPhase();
             }
         }
