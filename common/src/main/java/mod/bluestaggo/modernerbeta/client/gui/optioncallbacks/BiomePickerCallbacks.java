@@ -1,7 +1,7 @@
 package mod.bluestaggo.modernerbeta.client.gui.optioncallbacks;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.client.gui.screen.CustomizeBuffetLevelScreen;
+import mod.bluestaggo.modernerbeta.client.gui.screen.ModernBetaSelectBiomeScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
@@ -33,22 +33,20 @@ public record BiomePickerCallbacks(Consumer<Screen> screenChangeHandler, Screen 
 
             return ButtonWidget.builder(
                 "".equals(option.getValue())
-                    ? Text.translatable("createWorld.customize.modern_beta.settings.emptyBiome").formatted(Formatting.ITALIC)
+                    ? Text.translatable("gui.none").formatted(Formatting.ITALIC)
                     : Language.getInstance().hasTranslation(biomeTranslationKey)
                         ? Text.translatable(biomeTranslationKey)
                         : Text.literal(biomeIdentifier.toString()),
                 onPress -> {
-                    screenChangeHandler.accept(new CustomizeBuffetLevelScreen(
+                    screenChangeHandler.accept(new ModernBetaSelectBiomeScreen(
                         parentScreen,
                         generatorOptionsHolder,
                         biome -> {
                             if (biome != null) {
                                 RegistryKey<Biome> key = biome.getKey().orElse(BiomeKeys.PLAINS);
-                                if (BiomeKeys.THE_VOID.equals(key)) {
-                                    option.setValue("");
-                                } else {
-                                    option.setValue(key.getValue().toString());
-                                }
+                                option.setValue(key.getValue().toString());
+                            } else {
+                                option.setValue("");
                             }
                         }
                     ));
