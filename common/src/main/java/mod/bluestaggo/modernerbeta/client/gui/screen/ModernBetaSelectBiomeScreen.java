@@ -35,9 +35,9 @@ public class ModernBetaSelectBiomeScreen extends Screen {
         super(Text.translatable("createWorld.customize.modern_beta.title.biome_picker"));
         this.parent = parent;
         this.onDone = onDone;
-        this.biomeRegistry = generatorOptionsHolder.getCombinedRegistryManager().getOrThrow(RegistryKeys.BIOME);
+        this.biomeRegistry = generatorOptionsHolder.getCombinedRegistryManager().get(RegistryKeys.BIOME);
         RegistryEntry<Biome> registryEntry = this.biomeRegistry
-                .getOptional(BiomeKeys.PLAINS)
+                .getEntry(BiomeKeys.PLAINS)
                 .or(() -> this.biomeRegistry.streamEntries().findAny())
                 .orElseThrow();
         this.biome = generatorOptionsHolder.selectedDimensions()
@@ -73,11 +73,6 @@ public class ModernBetaSelectBiomeScreen extends Screen {
                 .findFirst()
                 .orElse(null));
         this.layout.forEachChild(this::addDrawableChild);
-        this.refreshWidgetPositions();
-    }
-
-    @Override
-    protected void refreshWidgetPositions() {
         this.layout.refreshPositions();
         this.biomeSelectionList.position(this.width, this.layout);
     }
