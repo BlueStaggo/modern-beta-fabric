@@ -81,12 +81,12 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
         ));
     }
 
-    protected SimpleOption<?> biomeOption(int i) {
+    protected SimpleOption<?> biomeOption(int i, boolean allowNone) {
         return new SimpleOption<>(
             "",
             SimpleOption.emptyTooltip(),
             (optionText, value) -> Text.of(settings.getString(i)),
-            new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder),
+            new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder, allowNone),
             settings.getString(i),
             value -> {
                 settings.remove(i);
@@ -96,12 +96,12 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
         );
     }
 
-    protected SimpleOption<?> biomeSubOption(int i, String subKey) {
+    protected SimpleOption<?> biomeSubOption(int i, String subKey, boolean allowNone) {
         return new SimpleOption<>(
             "",
             SimpleOption.emptyTooltip(),
             (optionText, value) -> Text.of(settings.getCompound(i).getString(subKey)),
-            new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder),
+            new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder, allowNone),
             settings.getCompound(i).getString(subKey),
             value -> {
                 settings.getCompound(i).put(subKey, NbtString.of(value));
@@ -121,7 +121,7 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
         );
     }
 
-    protected List<SimpleOption<?>> biomeInfoOption(int i) {
+    protected List<SimpleOption<?>> biomeInfoOption(int i, boolean allowNone) {
         return List.of(
             new SimpleOption<>(
                 "",
@@ -139,7 +139,7 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
                 "",
                 SimpleOption.emptyTooltip(),
                 (optionText, value) -> Text.of(settings.getString(i)),
-                new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder),
+                new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder, allowNone),
                 BiomeInfo.parse(settings.getString(i)).getLeft(),
                 value -> {
                     NbtElement removedElement = settings.remove(i);
@@ -154,11 +154,11 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
     protected List<SimpleOption<?>> voronoiPointBiomeOption(int i) {
         ArrayList<SimpleOption<?>> list = new ArrayList<>(List.of(
             this.headerOption(Text.translatable(STRING_PREFIX + "biome.climateMappings." + NbtTags.BIOME)),
-            this.biomeSubOption(i, NbtTags.BIOME),
+            this.biomeSubOption(i, NbtTags.BIOME, false),
             this.headerOption(Text.translatable(STRING_PREFIX + "biome.climateMappings." + NbtTags.OCEAN_BIOME)),
-            this.biomeSubOption(i, NbtTags.OCEAN_BIOME),
+            this.biomeSubOption(i, NbtTags.OCEAN_BIOME, false),
             this.headerOption(Text.translatable(STRING_PREFIX + "biome.climateMappings." + NbtTags.DEEP_OCEAN_BIOME)),
-            this.biomeSubOption(i, NbtTags.DEEP_OCEAN_BIOME),
+            this.biomeSubOption(i, NbtTags.DEEP_OCEAN_BIOME, false),
             this.floatRangeSubOption(i, NbtTags.TEMP, 0.0F, 1.0F),
             this.floatRangeSubOption(i, NbtTags.RAIN, 0.0F, 1.0F),
             this.floatRangeSubOption(i, NbtTags.WEIRD, 0.0F, 1.0F)
@@ -170,7 +170,7 @@ public abstract class ModernBetaGraphicalListSettingsScreen extends ModernBetaGr
     protected List<SimpleOption<?>> voronoiPointCaveBiomeOption(int i) {
         ArrayList<SimpleOption<?>> list = new ArrayList<>(List.of(
             this.headerOption(Text.translatable(STRING_PREFIX + "biome.climateMappings." + NbtTags.BIOME)),
-            this.biomeSubOption(i, NbtTags.BIOME),
+            this.biomeSubOption(i, NbtTags.BIOME, true),
             this.floatRangeSubOption(i, NbtTags.TEMP, 0.0F, 1.0F),
             this.floatRangeSubOption(i, NbtTags.RAIN, 0.0F, 1.0F),
             this.floatRangeSubOption(i, NbtTags.DEPTH, 0.0F, 1.0F)
