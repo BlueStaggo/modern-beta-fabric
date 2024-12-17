@@ -49,7 +49,7 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                 .toArray(String[]::new)));
 
         if (ModernBetaBuiltInTypes.Biome.SINGLE.id.equals(biomeProvider)) {
-            list.addOptionEntry(this.headerOption(this.getText(NbtTags.SINGLE_BIOME)), this.biomeOption(NbtTags.SINGLE_BIOME));
+            list.addOptionEntry(this.headerOption(this.getText(NbtTags.SINGLE_BIOME)), this.biomeOption(NbtTags.SINGLE_BIOME, false));
         } else if (usesNoise) {
             var noiseOptionList = new ArrayList<SimpleOption<?>>(List.of(
                 this.booleanOption(NbtTags.USE_OCEAN_BIOMES),
@@ -77,11 +77,11 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
                     list.addSingleOptionEntry(this.headerOption(this.getText(prefix + climateMapping).formatted(Formatting.BOLD)));
                     list.addAll(new SimpleOption[]{
                         this.headerOption(this.getText(prefix + NbtTags.BIOME)),
-                        this.biomeOption(prefix + climateMapping + "." + NbtTags.BIOME),
+                        this.biomeOption(prefix + climateMapping + "." + NbtTags.BIOME, false),
                         this.headerOption(this.getText(prefix + NbtTags.OCEAN_BIOME)),
-                        this.biomeOption(prefix + climateMapping + "." + NbtTags.OCEAN_BIOME),
+                        this.biomeOption(prefix + climateMapping + "." + NbtTags.OCEAN_BIOME, false),
                         this.headerOption(this.getText(prefix + NbtTags.DEEP_OCEAN_BIOME)),
-                        this.biomeOption(prefix + climateMapping + "." + NbtTags.DEEP_OCEAN_BIOME)
+                        this.biomeOption(prefix + climateMapping + "." + NbtTags.DEEP_OCEAN_BIOME, false)
                     });
                 }
             }
@@ -204,9 +204,9 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
             list.addSingleOptionEntry(this.headerOption(this.getText("header.individualBiomes").formatted(Formatting.BOLD)));
             list.addAll(new SimpleOption[] {
                 this.headerOption(this.getText(NbtTags.FRACTAL_PLAINS)),
-                this.biomeOption(NbtTags.FRACTAL_PLAINS),
+                this.biomeOption(NbtTags.FRACTAL_PLAINS, false),
                 this.headerOption(this.getText(NbtTags.FRACTAL_ICE_PLAINS)),
-                this.biomeOption(NbtTags.FRACTAL_ICE_PLAINS),
+                this.biomeOption(NbtTags.FRACTAL_ICE_PLAINS, false),
             });
         }
     }
@@ -218,7 +218,7 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
 
         @Override
         protected List<SimpleOption<?>> getOptions(int i) {
-            return this.biomeInfoOption(i);
+            return this.biomeInfoOption(i, false);
         }
 
         @Override
@@ -237,8 +237,8 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
             ArrayList<SimpleOption<?>> options = new ArrayList<>();
             options.add(this.headerOption(Text.translatable(this.getTextKey("item"), i).formatted(Formatting.BOLD)));
             options.add(null);
-            options.addAll(this.biomeInfoOption(KEY + i));
-            options.addAll(this.biomeInfoOption(VALUE + i));
+            options.addAll(this.biomeInfoOption(KEY + i, false));
+            options.addAll(this.biomeInfoOption(VALUE + i, false));
             return options;
         }
 
@@ -293,7 +293,7 @@ public class ModernBetaGraphicalBiomeSettingsScreen extends ModernBetaGraphicalC
             ArrayList<SimpleOption<?>> options = new ArrayList<>();
             options.add(this.headerOption(Text.translatable(this.getTextKey("item"), i).formatted(Formatting.BOLD)));
             options.add(null);
-            options.addAll(this.biomeInfoOption(KEY + i));
+            options.addAll(this.biomeInfoOption(KEY + i, false));
             options.add(this.listEditButton(
                 this.getText("biomeReplacements"),
                 VALUE + i,

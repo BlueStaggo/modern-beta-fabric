@@ -223,7 +223,7 @@ public class ModernBetaGraphicalChunkSettingsScreen extends ModernBetaGraphicalC
             ArrayList<SimpleOption<?>> options = new ArrayList<>();
             options.add(this.headerOption(Text.translatable(this.getTextKey("item"), i).formatted(Formatting.BOLD)));
             options.add(null);
-            options.addAll(this.biomeInfoOption(KEY + i));
+            options.addAll(this.biomeInfoOption(KEY + i, false));
             options.addAll(this.heightConfigOption(VALUE + i));
             return options;
         }

@@ -346,6 +346,7 @@
     "createWorld.customize.modern_beta.settings.biome.fractalUseClimaticBiomes": "Use Climatic Biomes",
 
     "createWorld.customize.modern_beta.settings.caveBiome.biomeProvider": "Biome Provider",
+    "createWorld.customize.modern_beta.settings.caveBiome.biomeProvider.none": "None",
     "createWorld.customize.modern_beta.settings.caveBiome.biomeProvider.single": "Single",
     "createWorld.customize.modern_beta.settings.caveBiome.biomeProvider.voronoi": "Voronoi",
     "createWorld.customize.modern_beta.settings.caveBiome.singleBiome": "Single Biome",

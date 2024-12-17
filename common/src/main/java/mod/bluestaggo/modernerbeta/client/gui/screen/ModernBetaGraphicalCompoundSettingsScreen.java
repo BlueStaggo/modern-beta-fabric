@@ -231,7 +231,7 @@ public abstract class ModernBetaGraphicalCompoundSettingsScreen extends ModernBe
         ));
     }
 
-    protected SimpleOption<String> biomeOption(String key) {
+    protected SimpleOption<String> biomeOption(String key, boolean allowNone) {
         Pair<NbtCompound, String> resolvedSettings = this.resolveSettings(key);
         NbtCompound settings = resolvedSettings.getLeft();
         String subKey = resolvedSettings.getRight();
@@ -240,13 +240,13 @@ public abstract class ModernBetaGraphicalCompoundSettingsScreen extends ModernBe
             this.getTextKey(key),
             SimpleOption.emptyTooltip(),
             (optionText, value) -> Text.of(settings.getString(subKey)),
-            new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder),
+            new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder, allowNone),
             settings.getString(subKey),
             value -> settings.putString(subKey, value)
         );
     }
 
-    protected List<SimpleOption<?>> biomeInfoOption(String key) {
+    protected List<SimpleOption<?>> biomeInfoOption(String key, boolean allowNone) {
         Pair<NbtCompound, String> resolvedSettings = this.resolveSettings(key);
         NbtCompound settings = resolvedSettings.getLeft();
         String subKey = resolvedSettings.getRight();
@@ -269,7 +269,7 @@ public abstract class ModernBetaGraphicalCompoundSettingsScreen extends ModernBe
                 "",
                 SimpleOption.emptyTooltip(),
                 (optionText, value) -> Text.of(settings.getString(subKey)),
-                new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder),
+                new BiomePickerCallbacks(this.client::setScreen, this, this.generatorOptionsHolder, allowNone),
                 BiomeInfo.parse(settings.getString(subKey)).getLeft(),
                 value -> {
                     NbtElement replacedElement = settings.get(subKey);
