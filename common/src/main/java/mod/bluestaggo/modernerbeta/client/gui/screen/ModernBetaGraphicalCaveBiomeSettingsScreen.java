@@ -37,7 +37,7 @@ public class ModernBetaGraphicalCaveBiomeSettingsScreen extends ModernBetaGraphi
                 .toArray(String[]::new)));
 
         if (ModernBetaBuiltInTypes.CaveBiome.SINGLE.id.equals(biomeProvider)) {
-            list.addAll(this.headerOption(this.getText(NbtTags.SINGLE_BIOME)), this.biomeOption(NbtTags.SINGLE_BIOME));
+            list.addAll(this.headerOption(this.getText(NbtTags.SINGLE_BIOME)), this.biomeOption(NbtTags.SINGLE_BIOME, false));
         } else if (ModernBetaBuiltInTypes.CaveBiome.VORONOI.id.equals(biomeProvider)) {
             list.addAll(
                 this.floatRangeOption(NbtTags.VORONOI_HORIZONTAL_NOISE_SCALE, 0.001F, 100.0F),

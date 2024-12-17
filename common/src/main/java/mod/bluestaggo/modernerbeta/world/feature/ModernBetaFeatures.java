@@ -6,10 +6,8 @@ import mod.bluestaggo.modernerbeta.ModernerBeta;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.LakeFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
-@SuppressWarnings("deprecation")
 public class ModernBetaFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ModernerBeta.MOD_ID, RegistryKeys.FEATURE);
     public static final RegistrySupplier<BetaFreezeTopLayerFeature> FREEZE_TOP_LAYER = register(
@@ -27,8 +25,6 @@ public class ModernBetaFeatures {
     public static final RegistrySupplier<CaveInfdev325Feature> CAVE_INFDEV_325 = register(
         ModernBetaFeatureTags.CAVE_INFDEV_325, new CaveInfdev325Feature(OreFeatureConfig.CODEC)
     );
-    
-    public static final Feature<LakeFeature.Config> LAKE_WATER = Feature.LAKE;
     
     private static <F extends Feature<?>> RegistrySupplier<F> register(String id, F feature) {
         return FEATURES.register(ModernerBeta.createId(id), () -> feature);

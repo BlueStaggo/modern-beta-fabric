@@ -26,15 +26,17 @@ public class ModernBetaSelectBiomeScreen extends Screen {
     private final ThreePartsLayoutWidget layout = new ThreePartsLayoutWidget(this);
     private final Screen parent;
     private final Consumer<RegistryEntry<Biome>> onDone;
+    private final boolean allowNone;
     final Registry<Biome> biomeRegistry;
     private BiomeListWidget biomeSelectionList;
     RegistryEntry<Biome> biome;
     private ButtonWidget confirmButton;
 
-    public ModernBetaSelectBiomeScreen(Screen parent, GeneratorOptionsHolder generatorOptionsHolder, Consumer<RegistryEntry<Biome>> onDone) {
+    public ModernBetaSelectBiomeScreen(Screen parent, GeneratorOptionsHolder generatorOptionsHolder, Consumer<RegistryEntry<Biome>> onDone, boolean allowNone) {
         super(Text.translatable("createWorld.customize.modern_beta.title.biome_picker"));
         this.parent = parent;
         this.onDone = onDone;
+        this.allowNone = allowNone;
         this.biomeRegistry = generatorOptionsHolder.getCombinedRegistryManager().getOrThrow(RegistryKeys.BIOME);
         RegistryEntry<Biome> registryEntry = this.biomeRegistry
                 .getOptional(BiomeKeys.PLAINS)
@@ -90,7 +92,8 @@ public class ModernBetaSelectBiomeScreen extends Screen {
         BiomeListWidget() {
             super(ModernBetaSelectBiomeScreen.this.client, ModernBetaSelectBiomeScreen.this.width, ModernBetaSelectBiomeScreen.this.height - 77, 40, 16);
             Collator collator = Collator.getInstance(Locale.getDefault());
-            this.addEntry(new BiomeItem());
+            if (ModernBetaSelectBiomeScreen.this.allowNone)
+                this.addEntry(new BiomeItem());
             ModernBetaSelectBiomeScreen.this.biomeRegistry
                     .streamEntries()
                     .map(BiomeItem::new)

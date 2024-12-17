@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public record BiomePickerCallbacks(Consumer<Screen> screenChangeHandler, Screen parentScreen, GeneratorOptionsHolder generatorOptionsHolder) implements SimpleOption.Callbacks<String> {
+public record BiomePickerCallbacks(Consumer<Screen> screenChangeHandler, Screen parentScreen, GeneratorOptionsHolder generatorOptionsHolder, boolean allowNone) implements SimpleOption.Callbacks<String> {
     @Override
     public Function<SimpleOption<String>, ClickableWidget> getWidgetCreator(SimpleOption.TooltipFactory<String> tooltipFactory, GameOptions gameOptions, int x, int y, int width, Consumer<String> changeCallback) {
         return option -> {
@@ -46,9 +46,14 @@ public record BiomePickerCallbacks(Consumer<Screen> screenChangeHandler, Screen 
                                 RegistryKey<Biome> key = biome.getKey().orElse(BiomeKeys.PLAINS);
                                 option.setValue(key.getValue().toString());
                             } else {
-                                option.setValue("");
+                                if (allowNone) {
+                                    option.setValue("");
+                                } else {
+                                    option.setValue(BiomeKeys.PLAINS.getValue().toString());
+                                }
                             }
-                        }
+                        },
+                        allowNone
                     ));
                 }
             ).dimensions(x, y, width, 20).build();
@@ -57,7 +62,7 @@ public record BiomePickerCallbacks(Consumer<Screen> screenChangeHandler, Screen 
 
     @Override
     public Optional<String> validate(String value) {
-        return "".equals(value) || generatorOptionsHolder.getCombinedRegistryManager()
+        return (allowNone && "".equals(value)) || generatorOptionsHolder.getCombinedRegistryManager()
             .getOrThrow(RegistryKeys.BIOME).containsId(Identifier.tryParse(value))
             ? Optional.of(value) : Optional.empty();
     }
