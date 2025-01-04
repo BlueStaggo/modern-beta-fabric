@@ -93,8 +93,8 @@ public class ModernBetaSettingsPresetScreen extends ModernBetaScreen {
     
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
         this.listWidget.render(context, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
     }
     
     @Override

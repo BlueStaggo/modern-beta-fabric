@@ -84,9 +84,13 @@ public abstract class ModernBetaGraphicalSettingsScreen<T extends NbtElement> ex
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.render(context, mouseX, mouseY, delta);
+        super.renderBackgroundWithOverlay(context);
         this.list.render(context, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
     }
+
+    @Override
+    protected void renderBackgroundWithOverlay(DrawContext context) {}
 
     protected String getTextKey(String key) {
         return getTextKey(key, null);
