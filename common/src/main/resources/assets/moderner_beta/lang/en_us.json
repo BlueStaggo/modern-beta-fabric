@@ -151,7 +151,7 @@
     "createWorld.customize.modern_beta.preset_category.desc.finite": "World generation between Classic 0.0.14a_08 and Indev 20100223",
     "createWorld.customize.modern_beta.preset_category.desc.early_release": "World generation between Beta 1.8 and Release 1.6.4",
     "createWorld.customize.modern_beta.preset_category.desc.early_release_large_biomes": "World generation between Beta 1.8 and Release 1.6.4 with Large Biomes",
-    "createWorld.customize.modern_beta.preset_category.desc.major_release": "World generation between Release 1.7.2 and Release 1.17.1 (NOTE: Experimental, expect inaccuracies)",
+    "createWorld.customize.modern_beta.preset_category.desc.major_release": "World generation between Release 1.7.2 and Release 1.17.1",
     "createWorld.customize.modern_beta.preset_category.desc.beta_custom": "Customized presets for Beta world generation",
     "createWorld.customize.modern_beta.preset_category.desc.release_custom": "Customize presets for Release world generation",
 
