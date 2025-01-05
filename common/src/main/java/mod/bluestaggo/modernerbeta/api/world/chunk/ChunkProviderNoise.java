@@ -43,8 +43,7 @@ public abstract class ChunkProviderNoise extends ChunkProvider {
     
     protected final int bedrockFloor;
     protected final int bedrockCeiling;
-    
-    protected final boolean useDeepslate;
+
     
     protected final BlockState defaultBlock;
     protected final BlockState defaultFluid;
@@ -77,8 +76,6 @@ public abstract class ChunkProviderNoise extends ChunkProvider {
         
         this.bedrockFloor = this.worldMinY;
         this.bedrockCeiling = this.worldTopY;
-        
-        this.useDeepslate = this.chunkSettings.useDeepslate;
 
         this.defaultBlock = generatorSettings.defaultBlock();
         this.defaultFluid = generatorSettings.defaultFluid();
