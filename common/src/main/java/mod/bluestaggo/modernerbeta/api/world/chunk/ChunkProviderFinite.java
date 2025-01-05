@@ -53,8 +53,6 @@ public abstract class ChunkProviderFinite extends ChunkProvider implements Chunk
     protected final int bedrockFloor;
     protected final int bedrockCeiling;
     
-    protected final boolean useDeepslate;
-    
     protected final BlockState defaultBlock;
     protected final BlockState defaultFluid;
     
@@ -82,7 +80,6 @@ public abstract class ChunkProviderFinite extends ChunkProvider implements Chunk
         this.seaLevel = generatorSettings.seaLevel() + this.getChunkSettings().seaLevelOffset;
         this.bedrockFloor = 0;
         this.bedrockCeiling = Integer.MIN_VALUE;
-        this.useDeepslate = this.chunkSettings.useDeepslate;
 
         this.defaultBlock = generatorSettings.defaultBlock();
         this.defaultFluid = generatorSettings.defaultFluid();

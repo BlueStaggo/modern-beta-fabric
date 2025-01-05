@@ -1,6 +1,5 @@
-## Additions
-- Updated the mod to 1.21.4
-- Added the new Pale Garden to Release Hybrid and Beta Vanilla presets.
-
-## Fixes
-- Fixed a crash involving certain fractal biome generator configurations.
+## Changes
+- Made major release generation more accurate.
+- Improved biome selection GUIs
+  - It is now possible to select "The Void" as a biome
+  - Made it so you cannot have none biome in cases where a biome is required
