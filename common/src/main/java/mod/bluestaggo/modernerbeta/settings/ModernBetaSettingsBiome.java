@@ -432,6 +432,7 @@ public class ModernBetaSettingsBiome implements ModernBetaSettings {
             this.fractalBiomes = FractalSettings.listFromReader(NbtTags.FRACTAL_BIOMES, reader, this.fractalBiomes);
             this.fractalClimaticBiomes = ClimaticBiomeList.fromReader(NbtTags.FRACTAL_CLIMATIC_BIOMES, reader, this.fractalClimaticBiomes);
             this.fractalHillVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_HILL_VARIANTS, reader, this.fractalHillVariants);
+            this.fractalEdgeVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_EDGE_VARIANTS, reader, this.fractalEdgeVariants);
             this.fractalVeryRareVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_VERY_RARE_VARIANTS, reader, this.fractalVeryRareVariants);
             this.fractalSubVariants = FractalSettings.subVariantsFromReader(NbtTags.FRACTAL_SUB_VARIANTS, reader, this.fractalSubVariants);
             this.fractalMutatedVariants = FractalSettings.mapFromReader(NbtTags.FRACTAL_MUTATED_VARIANTS, reader, this.fractalMutatedVariants);
