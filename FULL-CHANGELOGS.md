@@ -1,3 +1,8 @@
+# 2.1.4
+
+## Changes
+- Fixed custom fractal edge variants not being used
+
 # 2.1.3
 
 ## Changes
